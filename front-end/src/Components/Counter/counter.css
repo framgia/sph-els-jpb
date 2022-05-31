@@ -1,0 +1,28 @@
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+}
+.counter > .global-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.counter > .global-state > h1 {
+  border: 2.1px solid black;
+  padding: 0.3rem 1rem;
+  text-align: center;
+}
+.counter > .global-state > .buttons {
+  display: flex;
+  gap: 0.3rem;
+}
+.counter > .global-state > .buttons * {
+  border: 2.1px solid black;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.12rem 0.45rem;
+}
