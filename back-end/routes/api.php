@@ -20,7 +20,10 @@ Route::get('/v1', function () {
 });
 
 /*------------------User-Routes------------------*/
-Route::group(['prefix' => '/v1/users'], function () {
+Route::group([
+    'prefix' => '/v1/users',
+    'middleware' => 'auth:sanctum'
+], function () {
     Route::post('/', [UsersController::class, 'store']);
     Route::get('/', [UsersController::class, 'index']);
     Route::get('/{user_id}', [UsersController::class, 'show']);
