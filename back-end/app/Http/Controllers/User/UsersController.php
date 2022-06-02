@@ -56,7 +56,10 @@ class UsersController extends Controller
     // Update the specified User in storage. 
     public function update(Request $request, $user_id)
     {
-        // This method will be updated in the future task for users update informations.
+        /* This method will be updated in the future task for users update informations.
+         * For now this method have no function for password confirmation yet.
+         * Password confirmation function will be done in the future task.
+         */
         $user = $request->validate([
             'first_name' => 'required|max:191',
             'last_name' => 'required|max:191',
@@ -75,12 +78,15 @@ class UsersController extends Controller
     }
 
     // Remove the specified User from storage. 
+    /*
     public function destroy($user_id)
     {
+        // This method is for future purposes if the users want to delete their account
         User::find($user_id)->delete();
 
         return response()->json(['message' => 'Account Deleted Successfully']);
     }
+    */
 
     // Login user and generate access token for authentication.
     public function login(Request $request)

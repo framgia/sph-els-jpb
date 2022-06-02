@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Lesson\LessonsController;
 use App\Http\Controllers\User\UsersController;
 use Illuminate\Http\Request;
@@ -30,9 +31,12 @@ Route::group(['prefix' => '/v1'], function () {
 //------------------All-Private-Routes------------------//
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    // User Private Routes
+    // Admin Private Routes.
+    Route::resource('/v1/admin', AdminController::class);
+
+    // User Private Routes.
     Route::resource('/v1/users', UsersController::class);
 
-    // Lessons Private Routes
+    // Lessons Private Routes.
     Route::resource('/v1/lessons', LessonsController::class);
 });

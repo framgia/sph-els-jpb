@@ -12,7 +12,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 class LessonsController extends Controller
 {
-
     // Call traits for reusable codes for checking if the user is admin
     use AdminTrait;
 
