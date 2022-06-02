@@ -27,7 +27,7 @@ class LessonsController extends Controller
     }
 
     // Store a newly created Lesson in storage.
-    public function store(Request $request)
+    public function store(Request $request, $lesson_id)
     {
         $this->isAdmin();
 
@@ -36,7 +36,7 @@ class LessonsController extends Controller
             'description' => 'required|string|max:191',
         ]);
 
-        $user = Lesson::create([
+        Lesson::findOrFail($lesson_id)->update([
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
@@ -59,7 +59,22 @@ class LessonsController extends Controller
     // Update the specified Lesson in storage.
     public function update(Request $request, $id)
     {
-        //
+
+        $this->isAdmin();
+
+        $data = $request->validate([
+            'title' => 'required|string|max:191',
+            'description' => 'required|string|max:191',
+        ]);
+
+        Lesson::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+        ]);
+
+        return response()->json([
+            'message' => 'Lesson Updated Successfully'
+        ], 201);
     }
 
     // Remove the specified Lesson from storage.
