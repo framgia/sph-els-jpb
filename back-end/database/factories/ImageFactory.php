@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,9 @@ class ImageFactory extends Factory
     public function definition()
     {
 
+        $headers = get_headers('https://source.unsplash.com/1600x900/?galaxy', 1);
         return [
-            'avatar_url' => 'https://api.multiavatar.com/' . $this->faker->numberBetween(000000, 999999),
-            'cover_url' => 'https://source.unsplash.com/1600x900/?beach'
+            'cover_url' => $headers["Location"]
         ];
     }
 }

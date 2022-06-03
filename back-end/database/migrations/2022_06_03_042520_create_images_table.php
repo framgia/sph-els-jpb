@@ -20,7 +20,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('avatar_url');
-            $table->string('cover_url')->nullable();
+            $table->string('cover_url', 999)->nullable();
             $table->timestamps();
         });
     }

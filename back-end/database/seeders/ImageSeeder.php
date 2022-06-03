@@ -18,6 +18,7 @@ class ImageSeeder extends Seeder
     {
         foreach (User::all() as $user) {
             Image::factory(1)->create([
+                'avatar_url' => "https://api.multiavatar.com/{$user->id}/{$user->first_name}",
                 'user_id' => $user->id,
             ]);
         };
