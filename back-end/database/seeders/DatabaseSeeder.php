@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\ImageSeeder;
 use Database\Seeders\ChoiceSeeder;
 use Database\Seeders\LessonSeeder;
 use Database\Seeders\QuestionSeeder;
@@ -28,7 +29,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             LessonSeeder::class,
             QuestionSeeder::class,
-            ChoiceSeeder::class
+            ChoiceSeeder::class,
+            ImageSeeder::class
         ]);
     }
 }
