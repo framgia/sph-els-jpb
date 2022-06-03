@@ -18,12 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 //
 
-
 //------------------All-Public-Routes------------------//
 Route::group(['prefix' => '/v1'], function () {
     Route::get('/', function () {
         return response('You are at the version 1 of this api');
     });
+
+    // User Routes.
     Route::post('/users', [UsersController::class, 'register']);
     Route::post('/users/login', [UsersController::class, 'login']);
 });
@@ -31,12 +32,12 @@ Route::group(['prefix' => '/v1'], function () {
 //------------------All-Private-Routes------------------//
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    // Admin Private Routes.
+    // Admin Routes.
     Route::resource('/v1/admin', AdminController::class);
 
-    // User Private Routes.
+    // User Routes.
     Route::resource('/v1/users', UsersController::class);
 
-    // Lessons Private Routes.
+    // Lessons Routes.
     Route::resource('/v1/lessons', LessonsController::class);
 });

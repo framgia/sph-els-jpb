@@ -73,6 +73,16 @@ From the Root folder install dependencies for the Back End
   composer install
 ```
 
+Optimize the back end
+
+```bash
+  php artisan config:clear
+  php artisan cache:clear
+  php artisan route:clear
+  php artisan optimize
+  composer dump-autoload
+```
+
 Start the Back End Server
 
 ```bash
