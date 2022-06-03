@@ -17,9 +17,13 @@ class ImageSeeder extends Seeder
     public function run()
     {
         foreach (User::all() as $user) {
-            Image::factory(1)->create([
-                'avatar_url' => "https://api.multiavatar.com/{$user->id}/{$user->first_name}",
+
+            $cover = get_headers('https://source.unsplash.com/1600x900/?galaxy', 1);
+
+            Image::create([
                 'user_id' => $user->id,
+                'avatar_url' => "https://api.multiavatar.com/{$user->id}/{$user->first_name}",
+                'cover_url' => $cover["Location"],
             ]);
         };
     }

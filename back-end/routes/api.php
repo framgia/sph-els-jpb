@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Lesson\LessonsController;
 use App\Http\Controllers\User\UsersController;
+use App\Http\Controllers\User\UserUpdateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('/v1/admin', AdminController::class);
 
     // User Routes.
-    Route::resource('/v1/users', UsersController::class);
+    Route::resource('/v1/users', UsersController::class)
+        ->only(['index', 'show', 'update', 'logout']);
 
     // Lessons Routes.
     Route::resource('/v1/lessons', LessonsController::class);
