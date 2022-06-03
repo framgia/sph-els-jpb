@@ -9,8 +9,10 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'avatar_url',
-        'cover_url',
-    ];
+    protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
