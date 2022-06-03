@@ -33,11 +33,14 @@ class AdminController extends Controller
     }
 
     // Update the specified User in storage. 
+    /*
     public function update(Request $request, $user_id)
     {
         $this->isAdmin();
 
         // Admin doesn't need to have a password confirmation function.
+        // * This method will be updated in the future for requesting a reset password. 
+        // * A function that will generate a random password should be added here.
 
         $user = $request->validate([
             'first_name' => 'required|max:191',
@@ -54,7 +57,7 @@ class AdminController extends Controller
         ]);
 
         return response()->json(['message' => 'Account Updated Successfully'], 201);
-    }
+    } */
 
     // Remove the specified User from storage. 
     public function destroy($user_id)
