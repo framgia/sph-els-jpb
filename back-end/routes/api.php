@@ -19,13 +19,22 @@ Route::get('/v1', function () {
     return response('You are at the version 1 of this api');
 });
 
-/*------------------User-Routes------------------*/
+/*------------------User-Public-Routes------------------*/
 Route::group(['prefix' => '/v1/users'], function () {
-    Route::post('/', [UsersController::class, 'store']);
+    Route::post('/', [UsersController::class, 'register']);
+    Route::post('/login', [UsersController::class, 'login']);
+});
+
+/*------------------User-Private-Routes------------------*/
+Route::group([
+    'prefix' => '/v1/users',
+    'middleware' => 'auth:sanctum'
+], function () {
     Route::get('/', [UsersController::class, 'index']);
     Route::get('/{user_id}', [UsersController::class, 'show']);
     Route::put('/{user_id}', [UsersController::class, 'update']);
     Route::delete('/{user_id}', [UsersController::class, 'destroy']);
+    Route::post('/logout', [UsersController::class, 'logout']);
 });
 
 
