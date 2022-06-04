@@ -1,17 +1,23 @@
-`[Commands]`
-From the root folder
+# Commands
 
-- cd back-end
-- php artisan serve
-- php artisan migrate:fresh --seed
+From the root folder.
 
-`[Pre-conditions]`
+```bash
+cd back-end
+php artisan serve
+php artisan migrate:fresh --seed
+```
+
+# Pre-conditions
+
+From the root folder.
+
 Open this link -> http://127.0.0.1:8000/
 Go to Postman or Insomnia to test the API
 
-`[Expected Output]`
+# Expected Output
 
-# **Public Routes**
+## ------------------**Public Routes**------------------
 
 ### For User
 
@@ -47,7 +53,7 @@ To login a new User, put this in the request body using JSON.
 }
 ```
 
-# **Private Routes**
+## ------------------**Private Routes**------------------
 
 ### For User
 
@@ -118,6 +124,6 @@ To update a lesson, put this in the request body using JSON.
 | `/api/v1/admin/{user_id}` | `PUT`    | Update specific user based on id from the database      | **Deprecated** |
 | `/api/v1/admin/{user_id}` | `DELETE` | Delete specific user based on id from the database      | ok             |
 
-`[Notes]`
+# Notes
 
 - Ensure to add this in the header `Accept application/json` in all methods to avoid the 405 methods not allowed error.
