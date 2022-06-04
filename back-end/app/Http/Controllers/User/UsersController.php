@@ -46,11 +46,11 @@ class UsersController extends Controller
             'cover_url' => $cover["Location"],
         ]);
 
-        $token = $user->createToken('elstoken')->plainTextToken;
+        // $token = $user->createToken('elstoken')->plainTextToken;
 
         return response()->json([
             'message' => 'Account Created Successfully',
-            $token
+            // $token
         ], 201);
     }
 
@@ -89,7 +89,7 @@ class UsersController extends Controller
             'first_name' => $data['first_name'] ? $data['first_name'] : $user->first_name,
             'last_name' => $data['last_name'] ? $data['last_name'] : $user->last_name,
             'email' => $data['email'] ? $data['email'] : $user->email,
-            'password' => $data['email'] ? bcrypt($data['new_password']) : $user->password,
+            'password' => $data['new_password'] ? bcrypt($data['new_password']) : $user->password,
         ]);
 
         $image = Image::findOrFail($user_id);
