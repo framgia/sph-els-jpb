@@ -27,7 +27,7 @@ class UsersController extends Controller
             'first_name' => 'required|string|max:191',
             'last_name' => 'required|string|max:191',
             'email' => 'required|string|unique:users|max:191',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string|confirmed|min:9',
         ]);
 
         $user = User::create([
@@ -68,13 +68,13 @@ class UsersController extends Controller
     public function update(Request $request, $user_id)
     {
         $data = $request->validate([
-            'avatar_url' => 'string|max:999|nullable',
-            'cover_url' => 'string|max:999|nullable',
+            'avatar_url' => 'url|max:999|nullable',
+            'cover_url' => 'url|max:999|nullable',
             'first_name' => 'string|max:191|nullable',
             'last_name' => 'string|max:191|nullable',
-            'email' => 'string|unique:users|max:191|nullable',
+            'email' => 'email|unique:users|max:191|nullable',
             'current_password' => 'string|required',
-            'new_password' => 'string|nullable',
+            'new_password' => 'string|nullable|min:9',
         ]);
 
         $user = User::findOrFail($user_id);
