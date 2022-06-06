@@ -68,8 +68,8 @@ class UsersController extends Controller
     public function update(Request $request, $user_id)
     {
         $data = $request->validate([
-            'avatar_url' => 'string|max:999|nullable',
-            'cover_url' => 'string|max:999|nullable',
+            'avatar_url' => 'url|max:999|nullable',
+            'cover_url' => 'url|max:999|nullable',
             'first_name' => 'string|max:191|nullable',
             'last_name' => 'string|max:191|nullable',
             'email' => 'email|unique:users|max:191|nullable',
