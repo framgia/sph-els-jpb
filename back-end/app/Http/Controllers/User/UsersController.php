@@ -72,7 +72,7 @@ class UsersController extends Controller
             'cover_url' => 'string|max:999|nullable',
             'first_name' => 'string|max:191|nullable',
             'last_name' => 'string|max:191|nullable',
-            'email' => 'string|unique:users|max:191|nullable',
+            'email' => 'email|unique:users|max:191|nullable',
             'current_password' => 'string|required',
             'new_password' => 'string|nullable',
         ]);

@@ -1,5 +1,3 @@
-![image](https://i.imgur.com/SNd4v1h.png)
-
 # Commands
 
 From the root folder.
@@ -28,7 +26,7 @@ Go to Postman or Insomnia to test the API
 | `/api/v1/users`       | `POST` | Register new User in the Database                | ok     |
 | `/api/v1/users/login` | `POST` | Login user and generate Token for Authentication | ok     |
 
-### User Register
+### **_User Register Request Body_**
 
 To register a new User, put this in the request body using JSON.
 `/api/v1/users`
@@ -43,7 +41,19 @@ To register a new User, put this in the request body using JSON.
 }
 ```
 
-### User Login
+### **_User Register Response Body_**
+
+After successful registration, you will receive a body response in JSON format that should have a message of success.
+If the registration is unsuccessful you will receive an error response.
+`Response`
+
+```bash
+{
+	"message": "Account Created Successfully"
+}
+```
+
+### **_User Login Request Body_**
 
 To login a new User, put this in the request body using JSON.
 `/api/v1/users/login`
@@ -55,9 +65,18 @@ To login a new User, put this in the request body using JSON.
 }
 ```
 
+`Response`
+
+```bash
+{
+	"message": "Success Login",
+	"0": "1|a23STzKXDWIxNXk9suJE2Dugo9xwlJU49flDfeX9"
+}
+```
+
 ## ------------------**Private Routes**------------------
 
-### For User
+### **_For User_**
 
 | Route                     | Method | Description                                             | Status |
 | :------------------------ | :----- | :------------------------------------------------------ | :----- |
@@ -66,7 +85,7 @@ To login a new User, put this in the request body using JSON.
 | `/api/v1/users/{user_id}` | `PUT`  | Update specific user based on id from the database      | ok     |
 | `/api/v1/users/logout`    | `POST` | Logout User and destroy the Authentication Token        | ok     |
 
-### User Update
+### **_User Update_**
 
 To update specific User Information, put this in the request body using JSON.
 `/api/v1/users/{user_id}`
@@ -83,6 +102,14 @@ To update specific User Information, put this in the request body using JSON.
 }
 ```
 
+`Response`
+
+```bash
+{
+	"message": "Account Updated Successfully"
+}
+```
+
 ### For Lesson
 
 | Route                         | Method   | Description                                          | Status |
@@ -93,7 +120,7 @@ To update specific User Information, put this in the request body using JSON.
 | `/api/v1/lessons/{lesson_id}` | `PUT`    | Update specific lesson based on id from the database | ok     |
 | `/api/v1/lessons/{lesson_id}` | `DELETE` | Delete specific lesson based on id from the database | ok     |
 
-### Create New Lesson
+### **_Create New Lesson_**
 
 To create new lesson, put this in the request body using JSON.
 `/api/v1/lessons`
@@ -105,7 +132,15 @@ To create new lesson, put this in the request body using JSON.
 }
 ```
 
-### Update Lesson
+`Response`
+
+```bash
+{
+	"message": "Lesson Created Successfully"
+}
+```
+
+### **_Update Lesson_**
 
 To update a lesson, put this in the request body using JSON.
 `/api/v1/lessons/{lesson_id}`
@@ -114,6 +149,14 @@ To update a lesson, put this in the request body using JSON.
 {
 	"title" : "Update This Lesson Title",
 	"description" : "This is the updated lesson description blebleblebleble."
+}
+```
+
+`Response`
+
+```bash
+{
+	"message": "Lesson Updated Successfully"
 }
 ```
 
@@ -129,3 +172,7 @@ To update a lesson, put this in the request body using JSON.
 # Notes
 
 - Ensure to add this in the header `Accept application/json` in all methods to avoid the 405 methods not allowed error.
+
+## Appendix
+
+Any additional information goes here
