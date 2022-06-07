@@ -11,7 +11,11 @@ export default function AuthFooter({ slug, message, link }) {
   return (
     <>
       <div className="register-footer">
-        <span>Or continue with</span>
+        <div className="continue-with">
+          <span className="line"></span>
+          <span name="message">Or continue with</span>
+          <span className="line-2"></span>
+        </div>
         <div className="connection-btn">
           <div className="github">
             <img src={Github} alt="github" />
