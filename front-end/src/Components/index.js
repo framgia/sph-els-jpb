@@ -1,10 +1,7 @@
-import Counter from './Counter';
-import Header from './Header';
-import Footer from './Footer';
 import Button from './Button';
 import AuthFooter from './AuthFooter';
 
-export { Counter, Header, Footer, Button, AuthFooter };
+export { Button, AuthFooter };
 
 /** Quick Guide on how this thing works.
  * Import the folder of your Component here, then add it in the export section.
