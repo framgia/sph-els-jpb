@@ -1,8 +1,10 @@
-import Counter from "./Counter";
-import Header from "./Header";
-import Footer from "./Footer";
+import Counter from './Counter';
+import Header from './Header';
+import Footer from './Footer';
+import Button from './Button';
+import AuthFooter from './AuthFooter';
 
-export { Counter, Header, Footer };
+export { Counter, Header, Footer, Button, AuthFooter };
 
 /** Quick Guide on how this thing works.
  * Import the folder of your Component here, then add it in the export section.
@@ -37,5 +39,6 @@ export { Counter, Header, Footer };
 ] 
  * You dont need to add /index.js, JavaScript is smart enough to know that you're importing the index.
  * This index contains all of your Component, so make sure to add your Component paths here before importing them to other pages.
- * 
+ * import AuthFooter from './AuthFooter/index';
+
 **/

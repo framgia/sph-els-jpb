@@ -1,0 +1,125 @@
+.register-body {
+  background-color: var(--dark-background);
+  color: var(--color-white);
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.register-body .left-container {
+  background: var(--core-color);
+  background-image: url('../../Assets/Images/register-img.svg');
+  background-size: 69%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 60%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img[alt='logo'] {
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  height: 60px;
+  width: 45px;
+}
+
+.register-body .right-container {
+  background-color: var(--dark-background);
+  width: 40%;
+  padding: 20px 69px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.register-body .right-container h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.register-body form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.name-field,
+.password-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.password-field {
+  margin-bottom: 30px;
+}
+.name-field > .fname,
+.lname,
+.password-field > .password,
+.confirm-password {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+.name-field > .fname > label,
+.lname > label,
+.password-field > .password > label,
+.confirm-password > label,
+.email > label {
+  font-size: 21px;
+  color: var(--color-white);
+  opacity: 0.82;
+}
+.name-field > .fname > input,
+.lname > input,
+.password-field > .password > input,
+.confirm-password > input,
+.email > input {
+  border: var(--border-size) solid var(--core-color);
+  border-radius: var(--radius-regular);
+  background-color: transparent;
+  padding: 12px 15px;
+  font-size: 21px;
+  color: var(--color-white);
+}
+
+.register-body .email {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 1350px) {
+  .name-field,
+  .password-field {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .name-field > .fname,
+  .lname,
+  .password-field > .password,
+  .confirm-password {
+    width: 100%;
+  }
+  .register-body .right-container {
+    padding: 30px;
+    width: 50%;
+  }
+  .register-body .left-container {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 801px) {
+  .register-body .left-container {
+    display: none;
+  }
+  .register-body .right-container {
+    width: 100%;
+    padding: 120px 30px;
+  }
+}

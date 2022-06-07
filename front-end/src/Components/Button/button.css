@@ -1,0 +1,17 @@
+.global-button {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--core-color);
+  padding: 9px;
+  color: var(--color-white);
+  font-size: 30px;
+  border: none;
+  border-radius: var(--radius-regular);
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  width: 100%;
+}
+
+.global-button:hover {
+  background-color: var(--core-color-focus) !important;
+  transition: 0.3s ease-in-out;
+}
