@@ -1,11 +1,28 @@
-import axios from 'axios';
+import { store } from '../App/Redux/Store';
 
-const baseURL = process.env.REACT_APP_BACKEND_URL;
-let headers = {};
+export const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
-const axiosInstance = axios.create({
-  baseURL,
-  headers,
-});
+export const setAdminHeaders = () => {
+  const token = store.getState().user.admin_token;
 
-export default axiosInstance;
+  return {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+};
+
+export const setHeaders = () => {
+  let token;
+  const state = store.getState().user;
+
+  state.admin_token ? (token = state.admin_token) : (token = state.user_token);
+
+  return {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+};
