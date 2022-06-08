@@ -119,6 +119,13 @@ img[alt='logo'] {
     display: none;
   }
   .register-body .right-container {
+    padding: 120px 30px;
+    width: 501px;
+    margin: 0px auto;
+  }
+}
+@media only screen and (max-width: 501px) {
+  .register-body .right-container {
     width: 100%;
     padding: 120px 30px;
   }
