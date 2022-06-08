@@ -1,6 +1,5 @@
 import React from 'react';
 import './auth-footer.css';
-import '../../Assets/Styles/index.css';
 import Github from '../../Assets/Images/github.png';
 import Twitter from '../../Assets/Images/twitter.png';
 import Google from '../../Assets/Images/google.png';

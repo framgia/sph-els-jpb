@@ -1,6 +1,5 @@
 import React from 'react';
 import './button.css';
-import '../../Assets/Styles/index.css';
 
 export default function Button({ value }) {
   return (

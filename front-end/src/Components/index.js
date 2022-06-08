@@ -1,7 +1,8 @@
 import Button from './Button';
 import AuthFooter from './AuthFooter';
+import Spinner from './Spinner';
 
-export { Button, AuthFooter };
+export { Button, AuthFooter, Spinner };
 
 /** Quick Guide on how this thing works.
  * Import the folder of your Component here, then add it in the export section.
