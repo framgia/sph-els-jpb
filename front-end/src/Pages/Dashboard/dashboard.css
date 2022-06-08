@@ -1,0 +1,8 @@
+.profile {
+  width: 100px;
+  height: 100px;
+}
+
+.profile > img[alt='pp'] {
+  width: 100%;
+}
