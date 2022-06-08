@@ -21,7 +21,6 @@ export default function Register() {
     isLoading: false,
     isError: {},
   });
-
   const error = flowState.isError;
 
   const onChange = (e) => {
