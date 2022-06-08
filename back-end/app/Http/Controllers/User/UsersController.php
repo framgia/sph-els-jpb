@@ -123,6 +123,16 @@ class UsersController extends Controller
         ]);
 
         $user = User::where('email', $data['email'])->first();
+        $images = Image::where('user_id', $user->id)->first();
+
+        $userData = [
+            'id' => $user->id,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'avatar_url' => $images->avatar_url,
+            'cover_url' => $images->cover_url
+        ];
 
         // Check user credential
         if (!$user || !Hash::check($data['password'], $user->password)) {
@@ -133,7 +143,8 @@ class UsersController extends Controller
 
         return response()->json([
             'message' => 'Success Login',
-            $token
+            'token' => $token,
+            'data' => $userData,
         ], 201);
     }
 
