@@ -5,8 +5,29 @@ import Twitter from '../../Assets/Images/twitter.png';
 import Google from '../../Assets/Images/google.png';
 import Facebook from '../../Assets/Images/facebook.png';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function AuthFooter({ slug, message, link }) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    background: '#8a8a8a',
+    timer: 1500,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
+
+  const onClick = () => {
+    Toast.fire({
+      icon: 'error',
+      title: 'Will be integrated soon.',
+    });
+  };
+
   return (
     <>
       <div className="register-footer">
@@ -17,16 +38,16 @@ export default function AuthFooter({ slug, message, link }) {
         </div>
         <div className="connection-btn">
           <div className="github">
-            <img src={Github} alt="github" />
+            <img src={Github} alt="github" onClick={onClick} />
           </div>
           <div className="twitter">
-            <img src={Twitter} alt="twitter" />
+            <img src={Twitter} alt="twitter" onClick={onClick} />
           </div>
           <div className="google">
-            <img src={Google} alt="google" />
+            <img src={Google} alt="google" onClick={onClick} />
           </div>
           <div className="facebook">
-            <img src={Facebook} alt="facebook" />
+            <img src={Facebook} alt="facebook" onClick={onClick} />
           </div>
         </div>
         <p>
