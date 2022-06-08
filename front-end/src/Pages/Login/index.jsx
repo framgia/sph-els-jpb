@@ -1,6 +1,5 @@
 import React from 'react';
 import './login.css';
-import '../../Assets/Styles/index.css';
 import logo from '../../Assets/Images/els.png';
 import * as Component from '../../Components';
 
