@@ -1,0 +1,70 @@
+.register-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.register-footer > .connection-btn {
+  display: flex;
+  align-items: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+.register-footer > .connection-btn > div {
+  background-color: var(--light-button);
+  height: 69px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: var(--radius-hard);
+  transition: 0.15s ease-in-out;
+}
+.register-footer > .connection-btn > div:hover {
+  cursor: not-allowed;
+  background-color: var(--inactive);
+  transition: 0.15s ease-in-out;
+}
+
+.link {
+  color: var(--core-color);
+}
+
+.copy-rights {
+  color: var(--inactive);
+}
+
+.continue-with {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.continue-with span[name='message'] {
+  width: 150px;
+  text-align: center;
+  color: var(--inactive);
+}
+
+.continue-with .line,
+.continue-with .line-2 {
+  border-bottom: 1px solid var(--inactive);
+  width: 60px;
+}
+
+@media only screen and (max-width: 801px) {
+  .register-footer > .connection-btn > div {
+    height: 49px;
+    width: 79px;
+  }
+  .register-footer > .connection-btn > div > img {
+    width: 60%;
+  }
+}

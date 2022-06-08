@@ -1,0 +1,118 @@
+.login-body {
+  background-color: var(--dark-background);
+  color: var(--color-white);
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.login-body .left-container {
+  background: var(--core-color);
+  background-image: url('../../Assets/Images/register-img.svg');
+  background-size: 69%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 60%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img[alt='logo'] {
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  height: 60px;
+  width: 45px;
+}
+
+.login-body .right-container {
+  background-color: var(--dark-background);
+  width: 40%;
+  padding: 20px 6%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-body .right-container h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.login-body form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  user-select: none;
+  margin-top: 69px;
+}
+
+.login-body input[name='remember'] {
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.password > label,
+.email > label {
+  font-size: 21px;
+  color: var(--color-white);
+  opacity: 0.82;
+}
+.password > input,
+.email > input {
+  border: var(--border-size) solid var(--core-color);
+  border-radius: var(--radius-regular);
+  background-color: transparent;
+  padding: 12px 15px;
+  font-size: 21px;
+  color: var(--color-white);
+}
+
+.login-body .email {
+  display: flex;
+  flex-direction: column;
+}
+.login-body .password {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 1350px) {
+  .login-body .right-container {
+    padding: 30px;
+    width: 50%;
+  }
+  .login-body .left-container {
+    width: 50%;
+  }
+  .login-body form {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 801px) {
+  .login-body .left-container {
+    display: none;
+  }
+  .login-body .right-container {
+    width: 100%;
+    padding: 120px 60px;
+  }
+  .login-body form {
+    margin-top: 39px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .login-body .right-container {
+    width: 100%;
+    padding: 120px 20px;
+  }
+  .login-body form {
+    margin-top: 39px;
+  }
+}
