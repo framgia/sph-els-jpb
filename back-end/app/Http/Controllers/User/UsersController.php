@@ -23,10 +23,11 @@ class UsersController extends Controller
     // Store a newly created User in storage. 
     public function register(Request $request)
     {
+
         $data = $request->validate([
             'first_name' => 'required|string|max:191',
             'last_name' => 'required|string|max:191',
-            'email' => 'required|string|unique:users|max:191',
+            'email' => 'required|email|unique:users|max:191',
             'password' => 'required|string|confirmed|min:9',
         ]);
 
