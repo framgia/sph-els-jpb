@@ -1,4 +1,4 @@
-import { store } from '../App/Redux/Store';
+import { store } from '../App/Redux/store';
 
 export const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
