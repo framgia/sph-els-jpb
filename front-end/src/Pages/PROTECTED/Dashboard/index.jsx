@@ -1,9 +1,10 @@
 import React from 'react';
 import './dashboard.css';
 import { useDispatch } from 'react-redux';
-import { destroyToken } from '../../App/Redux/Slices/UserSlice';
+import { destroyToken } from '../../../App/Redux/Slices/UserSlice';
 import Swal from 'sweetalert2';
 import { useCookies } from 'react-cookie';
+import { logout } from '../../../API/UserAPI';
 
 export default function Dashoard() {
   const dispatch = useDispatch();
@@ -13,8 +14,7 @@ export default function Dashoard() {
     <>
       <h1>Welcome to Dashboard</h1>
       <div className="profile">
-        {/* CORB Error need to bypass */}
-        {/* <img src={cookie.user.avatar_url} alt="pp" /> */}
+        <img src={cookie.user.avatar_url} alt="pp" />
         <img src={cookie.user.cover_url} alt="pp" />
       </div>
       <p>
@@ -35,8 +35,16 @@ export default function Dashoard() {
           }).then(() => {
             window.location = '/login';
           });
+
+          logout({
+            user_id: cookie.user.id,
+          }).then((res) => {
+            console.log(res);
+          });
+
           removeCookie('token');
           removeCookie('user');
+
           dispatch(destroyToken());
         }}
       >
