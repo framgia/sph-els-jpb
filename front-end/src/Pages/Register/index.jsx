@@ -17,6 +17,7 @@ export default function Register() {
     password_confirmation: '',
   });
 
+  // Error handling
   const [flowState, setFlowState] = useState({
     isLoading: false,
     isError: {},

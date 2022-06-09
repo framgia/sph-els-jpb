@@ -20,12 +20,17 @@ export default function Login() {
     password: '',
   });
 
+  // Error handling
   const [flowState, setFlowState] = useState({
     isLoading: false,
     isError: { errors: { email: '', password: '' }, message: '' },
   });
-  const { message } = flowState.isError;
+  let { message } = flowState.isError;
   const error = flowState.isError.errors ? flowState.isError.errors : {};
+  message =
+    message === 'Attempt to read property "id" on null'
+      ? 'Email address is not yet registered.'
+      : message;
 
   const Toast = Swal.mixin({
     toast: true,
