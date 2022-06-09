@@ -8,6 +8,8 @@ const initialState = {
     first_name: '',
     last_name: '',
     email: '',
+    is_active: false,
+    is_admin: false,
     avatar_url: '',
     cover_url: '',
   },
@@ -22,7 +24,9 @@ export const UserSlice = createSlice({
       state.user = action.payload;
     },
     setUserToken: (state, action) => {
-      state.user_token = action.payload;
+      state.user.is_admin === false
+        ? (state.user_token = action.payload)
+        : (state.admin_token = action.payload);
     },
     destroyToken: (state) => {
       state.user_token = '';
