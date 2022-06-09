@@ -8,3 +8,7 @@ export const register = (data) => {
 export const login = (data) => {
   return axios.post(`${API_BASE_URL}/users/login`, data, setHeaders());
 };
+
+export const logout = (id) => {
+  return axios.post(`${API_BASE_URL}/users/logout`, id, setHeaders());
+};
