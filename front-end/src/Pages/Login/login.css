@@ -83,7 +83,7 @@ img[alt='logo'] {
 
 @media only screen and (max-width: 1350px) {
   .login-body .right-container {
-    padding: 30px;
+    padding: 60px 90px;
     width: 50%;
   }
   .login-body .left-container {
@@ -94,7 +94,7 @@ img[alt='logo'] {
   }
 }
 
-@media only screen and (max-width: 801px) {
+@media only screen and (max-width: 1110px) {
   .login-body .left-container {
     display: none;
   }

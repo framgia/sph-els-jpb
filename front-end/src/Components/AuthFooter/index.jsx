@@ -5,24 +5,11 @@ import Twitter from '../../Assets/Images/twitter.png';
 import Google from '../../Assets/Images/google.png';
 import Facebook from '../../Assets/Images/facebook.png';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import Toast from '../../App/Swal2/toast';
 
 export default function AuthFooter({ slug, message, link }) {
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'bottom-end',
-    showConfirmButton: false,
-    background: '#8a8a8a',
-    timer: 1500,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
-  });
-
   const onClick = () => {
-    Toast.fire({
+    Toast(['bottom-end', '#8a8a8a']).fire({
       icon: 'error',
       title: 'Will be integrated soon.',
     });
