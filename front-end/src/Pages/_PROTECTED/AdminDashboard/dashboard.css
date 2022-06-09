@@ -1,0 +1,42 @@
+.profile {
+  width: 100px;
+  height: 100px;
+}
+
+.profile > img[alt='pp'] {
+  width: 100%;
+}
+img[alt='cover'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.dash-container {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  padding: 30px;
+  line-height: 33px;
+}
+
+.dash-container .dash-content button {
+  padding: 12px 30px;
+  border: none;
+  background-color: var(--core-color);
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 21px;
+}
+.dash-container .dash-content button:hover {
+  background-color: var(--core-color-focus);
+  color: white;
+}
