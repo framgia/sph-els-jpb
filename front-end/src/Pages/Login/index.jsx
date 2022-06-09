@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
 import './login.css';
-import logo from '../../Assets/Images/els.png';
-import * as Component from '../../Components';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { login } from '../../API/UserAPI';
-import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { useCookies } from 'react-cookie';
+import { login } from '../../API/userAPI';
+import * as Component from '../../Components';
+import logo from '../../Assets/Images/els.png';
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { AuthRedirect } from '../../App/Middlewares';
+import Toast from '../../App/Swal2/toast';
 
 export default function Login() {
+  // User state checker
+  AuthRedirect();
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [cookie, setCookie] = useCookies();
+  const [, setCookie] = useCookies();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -24,25 +26,13 @@ export default function Login() {
     isLoading: false,
     isError: { errors: { email: '', password: '' }, message: '' },
   });
+
   let { message } = flowState.isError;
   const error = flowState.isError.errors ? flowState.isError.errors : {};
   message =
     message === 'Attempt to read property "id" on null'
       ? 'Email address is not yet registered.'
       : message;
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    background: '#f5f5fc',
-    timer: 1500,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
-  });
 
   const onChange = (e) => {
     setFormData((lastState) => ({
@@ -58,16 +48,19 @@ export default function Login() {
 
     login(formData)
       .then((res) => {
-        console.log(res);
         setCookie('token', res.data.token);
         setCookie('user', res.data.data);
 
-        Toast.fire({
-          icon: 'success',
-          title: 'Signed in successfully',
-        }).then(() => {
-          navigate('/dashboard');
-        });
+        Toast(['top-end', '#f5f5fc'])
+          .fire({
+            icon: 'success',
+            title: 'Signed in successfully',
+          })
+          .then(() => {
+            res.data.data.is_admin
+              ? navigate('/admin/dashboard')
+              : navigate('/dashboard');
+          });
 
         setFormData({
           email: '',
