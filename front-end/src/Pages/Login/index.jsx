@@ -8,12 +8,11 @@ import { login } from '../../API/UserAPI';
 import { useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { useCookies } from 'react-cookie';
-import { setUserToken, setUser } from '../../App/Redux/Slices/UserSlice';
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [, setCookie] = useCookies();
+  const [cookie, setCookie] = useCookies();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -62,8 +61,6 @@ export default function Login() {
         console.log(res);
         setCookie('token', res.data.token);
         setCookie('user', res.data.data);
-        dispatch(setUserToken(res.data.token));
-        dispatch(setUser(res.data.data));
 
         Toast.fire({
           icon: 'success',

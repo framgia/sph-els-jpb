@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// This state will be used in future task for getting and setting realtime user state in client side
 const initialState = {
-  admin_token: '',
-  user_token: '',
   user: {
     id: 0,
     first_name: '',
@@ -19,21 +18,8 @@ const initialState = {
 export const UserSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-    },
-    setUserToken: (state, action) => {
-      state.user.is_admin === false
-        ? (state.user_token = action.payload)
-        : (state.admin_token = action.payload);
-    },
-    destroyToken: (state) => {
-      state.user_token = '';
-      state.admin_token = '';
-    },
-  },
+  reducers: {},
 });
 
-export const { setUser, setUserToken, destroyToken } = UserSlice.actions;
+export const {} = UserSlice.actions;
 export default UserSlice.reducer;
