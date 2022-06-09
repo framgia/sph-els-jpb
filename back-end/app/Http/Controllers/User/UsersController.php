@@ -43,7 +43,7 @@ class UsersController extends Controller
 
         Image::create([
             'user_id' => $user_id,
-            'avatar_url' => "https://api.multiavatar.com/{$user_id}/{$data['first_name']}",
+            'avatar_url' => "https://api.multiavatar.com/{$user_id}/{$data['first_name']}.png",
             'cover_url' => $cover["Location"],
         ]);
 
@@ -123,6 +123,16 @@ class UsersController extends Controller
         ]);
 
         $user = User::where('email', $data['email'])->first();
+
+        // Check user credential
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            return response()->json(['message' => 'Email or Password is incorrect'], 401);
+        }
+
+        $user->update([
+            "is_active" => true,
+        ]);
+
         $images = Image::where('user_id', $user->id)->first();
 
         $userData = [
@@ -130,14 +140,11 @@ class UsersController extends Controller
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
+            'is_active' => $user->is_active,
+            'is_admin' => $user->is_admin,
             'avatar_url' => $images->avatar_url,
             'cover_url' => $images->cover_url
         ];
-
-        // Check user credential
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-            return response()->json(['message' => 'Email or Password is incorrect'], 401);
-        }
 
         $token = $user->createToken('elstoken')->plainTextToken;
 
@@ -148,9 +155,15 @@ class UsersController extends Controller
         ], 201);
     }
 
-    // Logout user and delete the access token from storage. 
-    public function logout()
+    // Logout user and delete the access token from storage and set is_active to false. 
+    public function logout(Request $user_id)
     {
+        $user = User::findOrFail($user_id);
+
+        $user[0]->update([
+            "is_active" => false,
+        ]);
+
         auth()->user()->tokens()->delete();
 
         return response()->json([
