@@ -1,28 +1,17 @@
-import axios from 'axios';
-import { API_BASE_URL, setHeaders } from '.';
-
-const errorHandler = (err) => {
-  console.clear();
-  console.log(`Error: ${err.message}`);
-  console.log(`Response Message: ${err.response.data.message}`);
-};
+import { apiCall } from '.';
 
 export const register = (data) => {
-  return axios.post(`${API_BASE_URL}/users`, data);
+  return apiCall.post('/users', data);
 };
 
 export const login = (data) => {
-  return axios.post(`${API_BASE_URL}/users/login`, data, setHeaders());
+  return apiCall.post('/users/login', data);
 };
 
 export const user = (user_id) => {
-  return axios
-    .get(`${API_BASE_URL}/users/${user_id}`, setHeaders())
-    .catch((err) => {
-      errorHandler(err);
-    });
+  return apiCall.get(`/users/${user_id}`);
 };
 
 export const logout = (id) => {
-  return axios.post(`${API_BASE_URL}/users/logout`, id, setHeaders());
+  return apiCall.post('/users/logout', id);
 };

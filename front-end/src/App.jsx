@@ -23,19 +23,21 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <Middleware.UsersProtectedRoutes>
+              <Middleware.UserProtectedRoutes>
                 <ProtectedPage.Dashboard />
-              </Middleware.UsersProtectedRoutes>
+              </Middleware.UserProtectedRoutes>
             }
           />
 
           {/*--------------- Admin Private Routes ---------------*/}
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
+          <Route exact path="/admin/*" element={<Page.Error />} />
           <Route
             path="/admin/dashboard"
             element={
-              <Middleware.UsersProtectedRoutes>
+              <Middleware.AdminProtectedRoutes>
                 <ProtectedPage.AdminDashboard />
-              </Middleware.UsersProtectedRoutes>
+              </Middleware.AdminProtectedRoutes>
             }
           />
         </Routes>

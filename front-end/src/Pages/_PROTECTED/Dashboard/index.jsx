@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './dashboard.css';
 import Toast from '../../../App/Swal2/toast';
 import { useCookies } from 'react-cookie';
 import { logout } from '../../../API/userAPI';
+import { apiCall } from './../../../API/index';
 
 export default function Dashoard() {
   const [cookie, setCookie, removeCookie] = useCookies();
+
+  useEffect(() => {
+    apiCall.defaults.headers.Authorization = `Bearer ${cookie.token}`;
+  }, []);
 
   return (
     <>
@@ -30,13 +35,13 @@ export default function Dashoard() {
                 user_id: cookie.user.id,
               });
 
+              removeCookie('token');
+              removeCookie('user');
+
               Toast(['top-end', '#f5f5fc']).fire({
                 icon: 'success',
                 title: 'Logged out succesfully.',
               });
-
-              removeCookie('token');
-              removeCookie('user');
             }}
           >
             Logout

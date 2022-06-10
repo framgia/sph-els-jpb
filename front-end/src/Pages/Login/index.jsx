@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { AuthRedirect } from '../../App/Middlewares';
 import Toast from '../../App/Swal2/toast';
+import { useDispatch } from 'react-redux';
+import { setUser, setToken } from '../../App/Redux/Slices/userSlice';
+import { apiCall } from './../../API/index';
 
 export default function Login() {
   // User state checker
@@ -15,6 +18,7 @@ export default function Login() {
 
   const navigate = useNavigate();
   const [, setCookie] = useCookies();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -50,17 +54,19 @@ export default function Login() {
       .then((res) => {
         setCookie('token', res.data.token);
         setCookie('user', res.data.data);
+        dispatch(setToken(res.data.token));
+        dispatch(setUser(res.data.data));
 
-        Toast(['top-end', '#f5f5fc'])
-          .fire({
-            icon: 'success',
-            title: 'Signed in successfully',
-          })
-          .then(() => {
-            res.data.data.is_admin
-              ? navigate('/admin/dashboard')
-              : navigate('/dashboard');
-          });
+        apiCall.defaults.headers.Authorization = `Bearer ${res.data.token}`;
+
+        res.data.data.is_admin
+          ? navigate('/admin/dashboard')
+          : navigate('/dashboard');
+
+        Toast(['top-end', '#f5f5fc']).fire({
+          icon: 'success',
+          title: 'Signed in successfully',
+        });
 
         setFormData({
           email: '',
@@ -70,7 +76,6 @@ export default function Login() {
         setFlowState({ isLoading: false, isError: {} });
       })
       .catch((err) => {
-        console.log(err);
         setFlowState({ ...flowState, isError: err.response.data });
       });
   };

@@ -20,11 +20,21 @@ function AuthRedirect() {
       return navigate('/login');
     }
 
+    if (userState) {
+      if (path.pathname === '/') {
+        return navigate('/dashboard');
+      }
+    }
+
     // Not user but not logged in
-    if (!userRole && !userState) return null;
+    if (!userRole && !userState) {
+      return navigate('/login');
+    }
 
     // User and logged in
-    if (!userRole && userState) return navigate('/dashboard');
+    if (!userRole && userState) {
+      return navigate('/dashboard');
+    }
 
     // admin and logged in
     return navigate('/admin/dashboard');
