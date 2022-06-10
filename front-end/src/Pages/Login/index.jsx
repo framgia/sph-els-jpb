@@ -1,5 +1,5 @@
 import './login.css';
-import _ from 'lodash';
+import size from 'lodash/size';
 import { useCookies } from 'react-cookie';
 import { login } from '../../API/userAPI';
 import * as Component from '../../Components';
@@ -70,6 +70,7 @@ export default function Login() {
         setFlowState({ isLoading: false, isError: {} });
       })
       .catch((err) => {
+        console.log(err);
         setFlowState({ ...flowState, isError: err.response.data });
       });
   };
@@ -84,7 +85,7 @@ export default function Login() {
           <h1>Welcome Back</h1>
           <form onSubmit={onSubmit}>
             <span className="error-field" style={{ textAlign: 'center' }}>
-              {_.size(error) === 0 ? message : null}
+              {size(error) === 0 ? message : null}
             </span>
             <div className="email">
               <label htmlFor="email">Email</label>

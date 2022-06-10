@@ -26,13 +26,13 @@ export default function Dashoard() {
           </p>
           <button
             onClick={() => {
+              logout({
+                user_id: cookie.user.id,
+              });
+
               Toast(['top-end', '#f5f5fc']).fire({
                 icon: 'success',
                 title: 'Logged out succesfully.',
-              });
-
-              logout({
-                user_id: cookie.user.id,
               });
 
               removeCookie('token');

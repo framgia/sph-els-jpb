@@ -24,9 +24,5 @@ export const user = (user_id) => {
 };
 
 export const logout = (id) => {
-  return axios
-    .post(`${API_BASE_URL}/users/logout`, id, setHeaders())
-    .catch((err) => {
-      errorHandler(err);
-    });
+  return axios.post(`${API_BASE_URL}/users/logout`, id, setHeaders());
 };
