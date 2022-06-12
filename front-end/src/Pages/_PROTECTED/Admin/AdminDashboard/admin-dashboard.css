@@ -26,17 +26,3 @@ img[alt='cover'] {
   padding: 30px;
   line-height: 33px;
 }
-
-.dash-container .dash-content button {
-  padding: 12px 30px;
-  border: none;
-  background-color: var(--core-color);
-  color: white;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-top: 21px;
-}
-.dash-container .dash-content button:hover {
-  background-color: var(--core-color-focus);
-  color: white;
-}

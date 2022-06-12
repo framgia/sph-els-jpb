@@ -5,12 +5,8 @@ import { register } from '../../API/userAPI';
 import * as Component from '../../Components';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../Assets/Images/els.png';
-import { AuthRedirect } from '../../App/Middlewares';
 
 export default function Register() {
-  // User state checker
-  AuthRedirect();
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

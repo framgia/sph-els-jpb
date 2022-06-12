@@ -6,19 +6,13 @@ import * as Component from '../../Components';
 import logo from '../../Assets/Images/els.png';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-import { AuthRedirect } from '../../App/Middlewares';
 import Toast from '../../App/Swal2/toast';
-import { useDispatch } from 'react-redux';
-import { setUser, setToken } from '../../App/Redux/Slices/userSlice';
 import { apiCall } from './../../API/index';
 
 export default function Login() {
-  // User state checker
-  AuthRedirect();
-
   const navigate = useNavigate();
-  const [, setCookie] = useCookies();
-  const dispatch = useDispatch();
+
+  const [cookie, setCookie] = useCookies();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -31,12 +25,8 @@ export default function Login() {
     isError: { errors: { email: '', password: '' }, message: '' },
   });
 
-  let { message } = flowState.isError;
+  const { message } = flowState.isError;
   const error = flowState.isError.errors ? flowState.isError.errors : {};
-  message =
-    message === 'Attempt to read property "id" on null'
-      ? 'Email address is not yet registered.'
-      : message;
 
   const onChange = (e) => {
     setFormData((lastState) => ({
@@ -54,14 +44,12 @@ export default function Login() {
       .then((res) => {
         setCookie('token', res.data.token);
         setCookie('user', res.data.data);
-        dispatch(setToken(res.data.token));
-        dispatch(setUser(res.data.data));
 
         apiCall.defaults.headers.Authorization = `Bearer ${res.data.token}`;
 
         res.data.data.is_admin
-          ? navigate('/admin/dashboard')
-          : navigate('/dashboard');
+          ? navigate('/admin', { replace: true })
+          : navigate('/dashboard', { replace: true });
 
         Toast(['top-end', '#f5f5fc']).fire({
           icon: 'success',
