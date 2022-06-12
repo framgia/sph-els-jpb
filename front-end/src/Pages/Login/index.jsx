@@ -1,13 +1,13 @@
 import './login.css';
 import size from 'lodash/size';
 import { useCookies } from 'react-cookie';
-import { login } from '../../API/userAPI';
-import * as Component from '../../Components';
-import logo from '../../Assets/Images/els.png';
+import { login } from 'API/userAPI';
+import * as Component from 'Components';
+import logo from 'Assets/Images/els.png';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-import Toast from '../../App/Swal2/toast';
-import { apiCall } from './../../API/index';
+import Toast from 'App/Swal2/toast';
+import { apiCall } from 'API/index';
 
 export default function Login() {
   const navigate = useNavigate();

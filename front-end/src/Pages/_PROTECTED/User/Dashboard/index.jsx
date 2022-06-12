@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import './dashboard.css';
-import Toast from '../../../../App/Swal2/toast';
+import Toast from 'App/Swal2/toast';
 import { useCookies } from 'react-cookie';
-import { logout } from '../../../../API/userAPI';
-import { apiCall } from '../../../../API/index';
+import { logout } from 'API/userAPI';
+import { apiCall } from 'API/index';
 
 export default function Dashboard() {
   const [cookie, , removeCookie] = useCookies();

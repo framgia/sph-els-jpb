@@ -1,10 +1,10 @@
 import './register.css';
 import Swal from 'sweetalert2';
 import React, { useState } from 'react';
-import { register } from '../../API/userAPI';
-import * as Component from '../../Components';
+import { register } from 'API/userAPI';
+import * as Component from 'Components';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../Assets/Images/els.png';
+import logo from 'Assets/Images/els.png';
 
 export default function Register() {
   const navigate = useNavigate();
