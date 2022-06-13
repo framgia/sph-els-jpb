@@ -1,6 +1,5 @@
 import React from 'react';
 import './rename-me.css';
-import '../../Assets/Styles/index.css';
 
 export default function Error() {
   return (

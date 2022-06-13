@@ -9,7 +9,7 @@
 
 .login-body .left-container {
   background: var(--core-color);
-  background-image: url('../../Assets/Images/register-img.svg');
+  background-image: url('../../Assets/Images/login-img.svg');
   background-size: 69%;
   background-position: center;
   background-repeat: no-repeat;
@@ -83,7 +83,7 @@ img[alt='logo'] {
 
 @media only screen and (max-width: 1350px) {
   .login-body .right-container {
-    padding: 30px;
+    padding: 60px 90px;
     width: 50%;
   }
   .login-body .left-container {
@@ -94,20 +94,21 @@ img[alt='logo'] {
   }
 }
 
-@media only screen and (max-width: 801px) {
+@media only screen and (max-width: 1110px) {
   .login-body .left-container {
     display: none;
   }
   .login-body .right-container {
-    width: 100%;
-    padding: 120px 60px;
+    width: 501px;
+    margin: 0px auto;
+    padding: 120px 30px;
   }
   .login-body form {
     margin-top: 39px;
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 501px) {
   .login-body .right-container {
     width: 100%;
     padding: 120px 20px;

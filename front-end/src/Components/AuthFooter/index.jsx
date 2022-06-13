@@ -1,13 +1,20 @@
 import React from 'react';
 import './auth-footer.css';
-import '../../Assets/Styles/index.css';
 import Github from '../../Assets/Images/github.png';
 import Twitter from '../../Assets/Images/twitter.png';
 import Google from '../../Assets/Images/google.png';
 import Facebook from '../../Assets/Images/facebook.png';
 import { Link } from 'react-router-dom';
+import Toast from '../../App/Swal2/toast';
 
 export default function AuthFooter({ slug, message, link }) {
+  const onClick = () => {
+    Toast(['bottom-end', '#8a8a8a']).fire({
+      icon: 'error',
+      title: 'Will be integrated soon.',
+    });
+  };
+
   return (
     <>
       <div className="register-footer">
@@ -18,16 +25,16 @@ export default function AuthFooter({ slug, message, link }) {
         </div>
         <div className="connection-btn">
           <div className="github">
-            <img src={Github} alt="github" />
+            <img src={Github} alt="github" onClick={onClick} />
           </div>
           <div className="twitter">
-            <img src={Twitter} alt="twitter" />
+            <img src={Twitter} alt="twitter" onClick={onClick} />
           </div>
           <div className="google">
-            <img src={Google} alt="google" />
+            <img src={Google} alt="google" onClick={onClick} />
           </div>
           <div className="facebook">
-            <img src={Facebook} alt="facebook" />
+            <img src={Facebook} alt="facebook" onClick={onClick} />
           </div>
         </div>
         <p>

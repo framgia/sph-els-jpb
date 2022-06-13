@@ -22,7 +22,7 @@ class ImageSeeder extends Seeder
 
             Image::create([
                 'user_id' => $user->id,
-                'avatar_url' => "https://api.multiavatar.com/{$user->id}/{$user->first_name}",
+                'avatar_url' => "https://api.multiavatar.com/{$user->id}/{$user->first_name}.png",
                 'cover_url' => $cover["Location"],
             ]);
         };

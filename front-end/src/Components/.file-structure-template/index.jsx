@@ -1,6 +1,5 @@
-import React from "react";
-import "./rename-me.css";
-import "../../Assets/Styles/index.css";
+import React from 'react';
+import './rename-me.css';
 
 export default function RenameMe() {
   return (

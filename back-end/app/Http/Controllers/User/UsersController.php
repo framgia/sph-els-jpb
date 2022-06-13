@@ -23,10 +23,11 @@ class UsersController extends Controller
     // Store a newly created User in storage. 
     public function register(Request $request)
     {
+
         $data = $request->validate([
             'first_name' => 'required|string|max:191',
             'last_name' => 'required|string|max:191',
-            'email' => 'required|string|unique:users|max:191',
+            'email' => 'required|email|unique:users|max:191',
             'password' => 'required|string|confirmed|min:9',
         ]);
 
@@ -42,7 +43,7 @@ class UsersController extends Controller
 
         Image::create([
             'user_id' => $user_id,
-            'avatar_url' => "https://api.multiavatar.com/{$user_id}/{$data['first_name']}",
+            'avatar_url' => "https://api.multiavatar.com/{$user_id}/{$data['first_name']}.png",
             'cover_url' => $cover["Location"],
         ]);
 
@@ -128,17 +129,41 @@ class UsersController extends Controller
             return response()->json(['message' => 'Email or Password is incorrect'], 401);
         }
 
+        $user->update([
+            "is_active" => true,
+        ]);
+
+        $images = Image::where('user_id', $user->id)->first();
+
+        $userData = [
+            'id' => $user->id,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'is_active' => $user->is_active,
+            'is_admin' => $user->is_admin,
+            'avatar_url' => $images->avatar_url,
+            'cover_url' => $images->cover_url
+        ];
+
         $token = $user->createToken('elstoken')->plainTextToken;
 
         return response()->json([
             'message' => 'Success Login',
-            $token
+            'token' => $token,
+            'data' => $userData,
         ], 201);
     }
 
-    // Logout user and delete the access token from storage. 
-    public function logout()
+    // Logout user and delete the access token from storage and set is_active to false. 
+    public function logout(Request $user_id)
     {
+        $user = User::findOrFail($user_id);
+
+        $user[0]->update([
+            "is_active" => false,
+        ]);
+
         auth()->user()->tokens()->delete();
 
         return response()->json([

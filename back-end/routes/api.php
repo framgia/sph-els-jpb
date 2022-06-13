@@ -37,8 +37,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('/v1/admin', AdminController::class);
 
     // User Routes.
+    Route::post('/v1/users/logout', [UsersController::class, 'logout']);
     Route::resource('/v1/users', UsersController::class)
-        ->only(['index', 'show', 'update', 'logout']);
+        ->only(['index', 'show', 'update']);
 
     // Lessons Routes.
     Route::resource('/v1/lessons', LessonsController::class);

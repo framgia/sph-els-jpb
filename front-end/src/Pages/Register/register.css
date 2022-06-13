@@ -107,6 +107,7 @@ img[alt='logo'] {
     width: 100%;
   }
   .register-body .right-container {
+    padding: 60px 90px;
     width: 50%;
   }
   .register-body .left-container {
@@ -114,10 +115,17 @@ img[alt='logo'] {
   }
 }
 
-@media only screen and (max-width: 801px) {
+@media only screen and (max-width: 1110px) {
   .register-body .left-container {
     display: none;
   }
+  .register-body .right-container {
+    padding: 120px 30px;
+    width: 501px;
+    margin: 0px auto;
+  }
+}
+@media only screen and (max-width: 501px) {
   .register-body .right-container {
     width: 100%;
     padding: 120px 30px;

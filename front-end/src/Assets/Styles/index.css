@@ -7,6 +7,7 @@
   --color-semiblack: #262626;
   --color-white: #f5f5fc;
   --color-green: #20931d;
+  --color-error: #dd0a0a;
   --dark-background: #262626;
   --light-background: #f5f5fc;
   --input-focus: #44444433;
@@ -59,4 +60,20 @@ html {
 input:focus {
   outline: none;
   background-color: var(--input-focus) !important;
+}
+.input-error {
+  border: 3px solid var(--color-error) !important;
+}
+
+.error-field {
+  color: var(--color-error);
+}
+
+.swal2-modal {
+  background-color: var(--dark-background);
+  border: none;
+  color: var(--color-white);
+}
+.swal2-btn-success {
+  background-color: var(--core-color);
 }
