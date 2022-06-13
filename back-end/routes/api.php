@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Follow\FollowsController;
 use App\Http\Controllers\Lesson\LessonsController;
 use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\User\UserUpdateController;
@@ -31,16 +32,26 @@ Route::group(['prefix' => '/v1'], function () {
 });
 
 //------------------All-Private-Routes------------------//
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group([
+    'middleware' => 'auth:sanctum',
+    'prefix' => '/v1'
+], function () {
 
     // Admin Routes.
-    Route::resource('/v1/admin', AdminController::class);
+    Route::resource('/admin', AdminController::class);
 
     // User Routes.
-    Route::post('/v1/users/logout', [UsersController::class, 'logout']);
-    Route::resource('/v1/users', UsersController::class)
+    Route::post('/users/logout', [UsersController::class, 'logout']);
+    Route::resource('/users', UsersController::class)
         ->only(['index', 'show', 'update']);
 
     // Lessons Routes.
-    Route::resource('/v1/lessons', LessonsController::class);
+    Route::resource('/lessons', LessonsController::class);
+
+    // Follows Routes.
+    Route::resource('/follows', FollowsController::class);
+    Route::prefix('/follows')->group(function () {
+        Route::get('/following/{follower_id}', [FollowsController::class, 'followings']);
+        Route::get('/follower/{following_id}', [FollowsController::class, 'followers']);
+    });
 });
