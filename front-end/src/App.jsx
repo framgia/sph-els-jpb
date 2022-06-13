@@ -20,10 +20,10 @@ function App() {
       <Router>
         <Routes>
           {/*--------------- Public Routes ---------------*/}
-          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="*" element={<Page.Error />} />
 
           <Route element={<AuthChecker userRoles={roles.guest} />}>
+            <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Page.Login />} />
             <Route path="/register" element={<Page.Register />} />
           </Route>
