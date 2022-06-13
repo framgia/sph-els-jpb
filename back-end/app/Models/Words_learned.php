@@ -2,31 +2,24 @@
 
 namespace App\Models;
 
-use App\Models\Answer;
-use App\Models\Choice;
+use App\Models\User;
 use App\Models\Lesson;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Question extends Model
+class Words_learned extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-
-    public function choice()
+    public function user()
     {
-        return $this->hasMany(Choice::class);
+        return $this->belongsTo(User::class);
     }
 
     public function lesson()
     {
         return $this->belongsTo(Lesson::class);
-    }
-
-    public function answer()
-    {
-        return $this->hasMany(Answer::class);
     }
 }
