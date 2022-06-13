@@ -11,11 +11,9 @@ php artisan migrate:fresh --seed
 ```
 
 # Pre-conditions
-
-From the root folder.
-
-Open this link -> http://127.0.0.1:8000/
-Go to Postman or Insomnia to test the API
+  
+- Open this link -> http://127.0.0.1:8000/
+- Go to Postman or Insomnia to test the API
 
 # Expected Output
 

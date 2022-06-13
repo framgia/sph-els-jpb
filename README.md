@@ -83,6 +83,12 @@ Optimize the back end
   composer dump-autoload
 ```
 
+Seed the database with dummy data
+
+```bash
+  php artisan migrate:fresh --seed
+```
+
 Start the Back End Server
 
 ```bash

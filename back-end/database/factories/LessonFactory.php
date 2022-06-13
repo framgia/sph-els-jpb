@@ -17,8 +17,8 @@ class LessonFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->word(),
-            'description' => $this->faker->paragraph(1)
+            'title' => 'Dummy Lesson',
+            'description' => 'Choose the correct answer per question.'
         ];
     }
 }
