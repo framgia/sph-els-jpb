@@ -7,7 +7,6 @@ import logo from 'Assets/Images/els.png';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import Toast from 'App/Swal2/toast';
-import { apiCall } from 'API/index';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -44,8 +43,6 @@ export default function Login() {
       .then((res) => {
         setCookie('token', res.data.token);
         setCookie('user', res.data.data);
-
-        apiCall.defaults.headers.Authorization = `Bearer ${res.data.token}`;
 
         res.data.data.is_admin
           ? navigate('/admin', { replace: true })
