@@ -47,6 +47,10 @@ class FollowsController extends Controller
             return response()->json(['message' => 'User does not exist'], 404);
         }
 
+        if ($follower === $following) {
+            return response()->json(['message' => 'We don\'t do that here'], 200);
+        }
+
         $following_list = Follow::where('user_id', $follower)
             ->where('following_id', $following)
             ->first();
@@ -66,11 +70,21 @@ class FollowsController extends Controller
     // Unfollow user
     public function destroy(Request $request)
     {
-        $follower = $request['follower_id'];
-        $following = $request['following_id'];
+        $unfollower = $request['unfollower_id'];
+        $unfollowing = $request['unfollowing_id'];
 
-        $following_list = Follow::where('user_id', $follower)
-            ->where('following_id', $following)
+        $user = User::find($unfollowing);
+
+        if (!$user) {
+            return response()->json(['message' => 'User does not exist'], 404);
+        }
+
+        if ($unfollower === $unfollowing) {
+            return response()->json(['message' => 'We don\'t do that here'], 200);
+        }
+
+        $following_list = Follow::where('user_id', $unfollower)
+            ->where('following_id', $unfollowing)
             ->first();
 
         if ($following_list) {
