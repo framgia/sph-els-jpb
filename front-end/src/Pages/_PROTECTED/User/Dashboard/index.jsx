@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './dashboard.css';
 import Toast from 'App/Swal2/toast';
 import { useCookies } from 'react-cookie';
 import { logout } from 'API/userAPI';
-import { apiCall } from 'API/index';
 
 export default function Dashboard() {
   const [cookie, , removeCookie] = useCookies();
-
-  useEffect(() => {
-    apiCall.defaults.headers.Authorization = `Bearer ${cookie.token}`;
-  }, []);
 
   return (
     <>
