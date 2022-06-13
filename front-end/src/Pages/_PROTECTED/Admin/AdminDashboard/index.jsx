@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { logout } from 'API/userAPI';
 
 export default function AdminDashoard() {
-  const [cookie, setCookie, removeCookie] = useCookies();
+  const [cookie, , removeCookie] = useCookies();
 
   return (
     <>
