@@ -51,6 +51,7 @@ Route::group([
     // Follows Routes.
     Route::resource('/follows', FollowsController::class);
     Route::prefix('/follows')->group(function () {
+        Route::delete('/', [FollowsController::class, 'destroy']);
         Route::get('/following/{follower_id}', [FollowsController::class, 'followings']);
         Route::get('/follower/{following_id}', [FollowsController::class, 'followers']);
     });
