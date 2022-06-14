@@ -120,4 +120,18 @@ class LessonsController extends Controller
             'data' => $data
         ], 200);
     }
+
+    // Search lesson by title name
+    public function search($lesson_name)
+    {
+        $result = Lesson::where("title", "like", "%$lesson_name%")->get();
+
+        if (count($result) === 0) return response()->json([
+            'message' => "Can't find $lesson_name in the lessons list"
+        ], 200);
+
+        return response()->json([
+            'data' => $result
+        ], 200);
+    }
 }

@@ -45,10 +45,12 @@ Route::group([
     // User Routes.
     Route::resource('/users', UsersController::class)
         ->only(['index', 'show', 'update']);
+    Route::get('/users/search/{name}', [UsersController::class, 'search']);
     Route::post('/users/logout', [UsersController::class, 'logout']);
 
     // Lessons Routes.
     Route::resource('/lessons', LessonsController::class);
+    Route::get('/lessons/search/{lesson_name}', [LessonsController::class, 'search']);
     Route::get('/lessons/complete/{lesson_id}', [LessonsController::class, 'completeLesson']);
 
     // Questions Routes.
