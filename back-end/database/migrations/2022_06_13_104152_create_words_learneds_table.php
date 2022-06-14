@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('words_learned', function (Blueprint $table) {
+        Schema::create('words_learneds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained()
@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('word_learned');
+            $table->string('word_learned')->nullable();
             $table->timestamps();
         });
     }

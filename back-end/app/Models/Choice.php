@@ -12,8 +12,9 @@ class Choice extends Model
     protected $guarded = [];
 
     protected $hidden = [
-        'id',
+        // 'id',
         'question_id',
+        'is_correct',
         'created_at',
         'updated_at',
     ];

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Answer\AnswersChecker;
 use App\Http\Controllers\Follow\FollowsController;
 use App\Http\Controllers\Lesson\ChoicesController;
 use App\Http\Controllers\Lesson\LessonsController;
@@ -58,6 +59,9 @@ Route::group([
 
     // Choices Routes.
     Route::resource('/choices', ChoicesController::class);
+
+    // Answer Checker. 
+    Route::post('/answers/checker/{lesson_id}', [AnswersChecker::class, 'checker']);
 
     // Follows Routes. 
     Route::prefix('/follows')->group(function () {
