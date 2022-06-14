@@ -18,6 +18,9 @@ class FollowSeeder extends Seeder
     {
         foreach (User::all() as $user) {
             for ($i = 1; $i < 4; $i++) {
+                if ($i === $user->id) {
+                    continue;
+                }
                 Follow::create([
                     'user_id' => $user->id,
                     'following_id' => $i

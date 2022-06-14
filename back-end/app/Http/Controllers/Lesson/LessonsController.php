@@ -22,7 +22,7 @@ class LessonsController extends Controller
 
         return response()->json([
             'data' => $lessons
-        ]);
+        ], 200);
     }
 
     // Store a newly created Lesson in storage.
@@ -48,17 +48,16 @@ class LessonsController extends Controller
     // Display the specified Lesson.
     public function show($lesson_id)
     {
-        $lessons = Lesson::findOrFail($lesson_id);
+        $lesson = Lesson::find($lesson_id);
 
         return response()->json([
-            'data' => $lessons
-        ]);
+            'data' => $lesson
+        ], 200);
     }
 
     // Update the specified Lesson in storage.
     public function update(Request $request, $lesson_id)
     {
-
         $this->isAdmin();
 
         $data = $request->validate([
@@ -66,7 +65,7 @@ class LessonsController extends Controller
             'description' => 'required|string|max:191',
         ]);
 
-        Lesson::findOrFail($lesson_id)->updatecreate([
+        Lesson::find($lesson_id)->update([
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
@@ -79,8 +78,13 @@ class LessonsController extends Controller
     // Remove the specified Lesson from storage.
     public function destroy($lesson_id)
     {
-        Lesson::findOrFail($lesson_id)->delete();
+        $this->isAdmin();
 
-        return response()->json(['message' => 'Lesson Deleted Successfully']);
+        $lesson = Lesson::find($lesson_id);
+
+        if (!$lesson) return response()->json(['message' => 'This Lesson was already been deleted'], 200);
+
+        $lesson->delete();
+        return response()->json(['message' => 'Lesson Deleted Successfully'], 200);
     }
 }

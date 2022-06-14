@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('choose_id')
+            $table->foreignId('choice_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

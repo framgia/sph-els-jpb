@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Follow\FollowsController;
+use App\Http\Controllers\Lesson\ChoicesController;
 use App\Http\Controllers\Lesson\LessonsController;
+use App\Http\Controllers\Lesson\QuestionsController;
 use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\User\UserUpdateController;
 use Illuminate\Http\Request;
@@ -47,6 +49,12 @@ Route::group([
 
     // Lessons Routes.
     Route::resource('/lessons', LessonsController::class);
+
+    // Questions Routes.
+    Route::resource('/questions', QuestionsController::class);
+
+    // Choices Routes.
+    Route::resource('/choices', ChoicesController::class);
 
     // Follows Routes. 
     Route::prefix('/follows')->group(function () {

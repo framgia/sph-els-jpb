@@ -17,7 +17,7 @@ class ChoiceFactory extends Factory
     public function definition()
     {
         return [
-            'choices' => $this->faker->word(),
+            'choice' => $this->faker->word(),
             'is_correct' => false,
         ];
     }
