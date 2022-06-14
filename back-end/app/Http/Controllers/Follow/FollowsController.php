@@ -22,7 +22,6 @@ class FollowsController extends Controller
     {
         $followings = Follow::where('user_id', $follower_id)->get();
 
-        return response($followings);
         return response()->json(['data' => $followings], 200);
     }
 
