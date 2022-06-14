@@ -40,7 +40,7 @@ export default function Login() {
 
     login(formData)
       .then((res) => {
-        Cookies.set('token', JSON.stringify(res.data.token));
+        Cookies.set('token', res.data.token);
         Cookies.set('user', JSON.stringify(res.data.data));
 
         apiCall.defaults.headers.Authorization = `Bearer ${res.data.token}`;
