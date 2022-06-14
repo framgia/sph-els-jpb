@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AdminDashoard() {
   const navigate = useNavigate();
-  const user = Cookies.get('user');
+  const user = Cookies.get('user') && JSON.parse(Cookies.get('user'));
 
   return (
     <>
