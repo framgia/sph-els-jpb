@@ -37,8 +37,11 @@ class QuestionsController extends Controller
             'question' => $data['question'],
         ]);
 
+        $question_id = Question::latest()->first()->id;
+
         return response()->json([
-            'message' => "Question under lesson $request->lesson_id Created Successfully!"
+            'message' => "Question under lesson $request->lesson_id Created Successfully!",
+            'question_id' => $question_id
         ], 201);
     }
 

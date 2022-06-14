@@ -43,12 +43,13 @@ Route::group([
     Route::resource('/admin', AdminController::class);
 
     // User Routes.
-    Route::post('/users/logout', [UsersController::class, 'logout']);
     Route::resource('/users', UsersController::class)
         ->only(['index', 'show', 'update']);
+    Route::post('/users/logout', [UsersController::class, 'logout']);
 
     // Lessons Routes.
     Route::resource('/lessons', LessonsController::class);
+    Route::get('/lessons/complete/{lesson_id}', [LessonsController::class, 'completeLesson']);
 
     // Questions Routes.
     Route::resource('/questions', QuestionsController::class);

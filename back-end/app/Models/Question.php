@@ -14,6 +14,11 @@ class Question extends Model
 
     protected $guarded = [];
 
+    protected $hidden = [
+        'lesson_id',
+        'created_at',
+        'updated_at',
+    ];
 
     public function choice()
     {

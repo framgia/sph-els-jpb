@@ -6,6 +6,8 @@ use App\Models\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Traits\AdminTrait;
 use App\Http\Controllers\Controller;
+use App\Models\Choice;
+use App\Models\Question;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -40,8 +42,11 @@ class LessonsController extends Controller
             'description' => $data['description'],
         ]);
 
+        $lesson_id = Lesson::latest()->first()->id;
+
         return response()->json([
-            'message' => 'Lesson Created Successfully'
+            'message' => 'Lesson Created Successfully',
+            'lesson_id' => $lesson_id
         ], 201);
     }
 
@@ -86,5 +91,33 @@ class LessonsController extends Controller
 
         $lesson->delete();
         return response()->json(['message' => 'Lesson Deleted Successfully'], 200);
+    }
+
+    // Get Lesson with its questions and choices
+    public function completeLesson($lesson_id)
+    {
+        $lesson = Lesson::find($lesson_id);
+        $questions = Question::where('lesson_id', $lesson_id)->get();
+
+        $questionAndChoices = array();
+
+        foreach ($questions as $question) {
+            $choice = Choice::where('question_id', $question->id)->get();
+
+            array_push($questionAndChoices, [
+                "id" => $question->id,
+                "question" => $question->question,
+                "choices" => $choice
+            ]);
+        }
+
+        $data = [
+            'lesson' => $lesson,
+            'questions' => $questionAndChoices
+        ];
+
+        return response()->json([
+            'data' => $data
+        ], 200);
     }
 }
