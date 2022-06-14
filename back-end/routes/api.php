@@ -48,10 +48,11 @@ Route::group([
     // Lessons Routes.
     Route::resource('/lessons', LessonsController::class);
 
-    // Follows Routes.
-    Route::resource('/follows', FollowsController::class);
+    // Follows Routes. 
     Route::prefix('/follows')->group(function () {
-        Route::delete('/', [FollowsController::class, 'destroy']);
+        Route::get('/', [FollowsController::class, 'index']);
+        Route::post('/{following}', [FollowsController::class, 'store']);
+        Route::delete('/{unfollowing}', [FollowsController::class, 'destroy']);
         Route::get('/following/{follower_id}', [FollowsController::class, 'followings']);
         Route::get('/follower/{following_id}', [FollowsController::class, 'followers']);
     });

@@ -31,29 +31,22 @@ class FollowsController extends Controller
     {
         $followers = Follow::where('following_id', $following_id)->get();
 
-        return response($followers);
         return response()->json(['data' => $followers], 200);
     }
 
     // Follow user
-    public function store(Request $request)
+    public function store($following)
     {
-        $follower = $request['follower_id'];
-        $following = $request['following_id'];
-
-        $user = User::find($following);
-
-        if (!$user) {
-            return response()->json(['message' => 'User does not exist'], 404);
-        }
+        $follower = auth('sanctum')->user()->id;
 
         if ($follower === $following) {
             return response()->json(['message' => 'We don\'t do that here'], 200);
         }
 
-        $following_list = Follow::where('user_id', $follower)
-            ->where('following_id', $following)
-            ->first();
+        $following_list = Follow::where([
+            'user_id' => $follower,
+            'following_id' => $following
+        ])->first();
 
         if ($following_list) {
             return response(['message' => 'You already following this user']);
@@ -68,24 +61,18 @@ class FollowsController extends Controller
     }
 
     // Unfollow user
-    public function destroy(Request $request)
+    public function destroy($unfollowing)
     {
-        $unfollower = $request['unfollower_id'];
-        $unfollowing = $request['unfollowing_id'];
-
-        $user = User::find($unfollowing);
-
-        if (!$user) {
-            return response()->json(['message' => 'User does not exist'], 404);
-        }
+        $unfollower = auth('sanctum')->user()->id;
 
         if ($unfollower === $unfollowing) {
             return response()->json(['message' => 'We don\'t do that here'], 200);
         }
 
-        $following_list = Follow::where('user_id', $unfollower)
-            ->where('following_id', $unfollowing)
-            ->first();
+        $following_list = Follow::where([
+            'user_id' => $unfollower,
+            'following_id' => $unfollowing
+        ])->first();
 
         if ($following_list) {
             $following_list->delete();
@@ -93,6 +80,6 @@ class FollowsController extends Controller
             return response()->json(['message' => 'You unfollow this user'], 200);
         }
 
-        return response()->json(['message' => 'You already unfollowed this user'], 404);
+        return response()->json(['message' => 'You already unfollowed this user'], 200);
     }
 }
