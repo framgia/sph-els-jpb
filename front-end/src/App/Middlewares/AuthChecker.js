@@ -1,13 +1,13 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 const AuthChecker = ({ userRoles }) => {
-  const [cookie] = useCookies();
+  const userData = Cookies.get('user') && JSON.parse(Cookies.get('user'));
 
-  const userStatus = cookie?.user?.is_active ? true : false;
+  const userStatus = userData?.is_active ? true : false;
 
-  const user = !cookie?.user?.is_admin && userStatus ? 'user' : false;
-  const admin = cookie?.user?.is_admin ? 'admin' : false;
+  const user = !userData?.is_admin && userStatus ? 'user' : false;
+  const admin = userData?.is_admin ? 'admin' : false;
   const guest = userRoles === 'guest' && !userStatus ? 'guest' : false;
 
   if (userStatus) {
