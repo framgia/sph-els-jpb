@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Answer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Choice;
-use App\Models\Lesson;
 use App\Models\Question;
 use App\Models\Words_learned;
 use Illuminate\Http\Request;
 
 class AnswersChecker extends Controller
 {
-    public function checker(Request $request, $lesson_id)
+    public function checker($lesson_id)
     {
         // Get User ID.
         $user = auth('sanctum')->user()->id;
 
-        // Validator if the lesson is already been taken by this user
+        // Validator if the lesson was already been taken by this user.
         $lessonTaken = Words_learned::where('lesson_id', $lesson_id)->first();
 
         if ($lessonTaken)  return response()->json([
@@ -49,15 +49,22 @@ class AnswersChecker extends Controller
             }
         };
 
-        // Check user's answer from the lesson's correct answer then get the total score.
+        // Check user's answer with the lesson's correct answer then get the total score.
         $score = 0;
         $wordsLearned = array();
         $answerCorrections = array();
 
         for ($i = 0; $i < count($correctAnswers); $i++) {
-            // Get all the correct words from user.
             $chosenWord = Choice::where('id', $userAnswers[$i])->first();
             $correctWord = Choice::where('id', $correctAnswers[$i])->first();
+
+            // Save all the user's answers data in the Answers table
+            Answer::create([
+                'user_id' => $user,
+                'question_id' => $chosenWord->question_id,
+                'choice_id' => $chosenWord->id,
+                'is_correct' => $chosenWord->is_correct,
+            ]);
 
             array_push($answerCorrections, [
                 'choice' => $chosenWord->choice,
@@ -65,6 +72,7 @@ class AnswersChecker extends Controller
                 'is_correct' => false,
             ]);
 
+            // Get all the correct words from user.
             if ($correctAnswers[$i] === $userAnswers[$i]) {
 
                 array_push($wordsLearned, $chosenWord);
@@ -75,7 +83,7 @@ class AnswersChecker extends Controller
             };
         }
 
-        // Save all the correct answers and the lesson taken to words_learned table.
+        // Save all the correct answers, and the lesson id taken to words_learned table.
         if ($score === 0) {
             Words_learned::create([
                 'user_id' => $user,
@@ -92,6 +100,7 @@ class AnswersChecker extends Controller
             ]);
         }
 
+        // If all the conditions are met, return the essential data for the front end.
         return response()->json([
             'score' => $score,
             'data' => $answerCorrections,
