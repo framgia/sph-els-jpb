@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Answer\AnswersChecker;
+use App\Http\Controllers\Answer\WordsLearned;
 use App\Http\Controllers\Follow\FollowsController;
 use App\Http\Controllers\Lesson\ChoicesController;
 use App\Http\Controllers\Lesson\LessonsController;
@@ -62,6 +63,8 @@ Route::group([
 
     // Answer Checker. 
     Route::post('/answers/checker/{lesson_id}', [AnswersChecker::class, 'checker']);
+    Route::get('/words/learned', [WordsLearned::class, 'index']);
+    Route::get('/words/learned/{lesson_id}', [WordsLearned::class, 'show']);
 
     // Follows Routes. 
     Route::prefix('/follows')->group(function () {
