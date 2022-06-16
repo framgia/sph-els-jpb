@@ -29,4 +29,9 @@ class Words_learned extends Model
     {
         return $this->belongsTo(Lesson::class);
     }
+
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'activitiable');
+    }
 }

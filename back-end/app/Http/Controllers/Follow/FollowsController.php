@@ -54,7 +54,11 @@ class FollowsController extends Controller
         Follow::create([
             'user_id' => $follower,
             'following_id' => $following
+        ])->activities()->create([
+            'user_id' => $follower
         ]);
+
+
 
         return response()->json(['message' => 'Followed successfully'], 201);
     }

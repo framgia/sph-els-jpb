@@ -15,4 +15,9 @@ class Follow extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'activitiable');
+    }
 }

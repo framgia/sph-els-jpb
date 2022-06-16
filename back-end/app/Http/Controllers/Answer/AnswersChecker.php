@@ -17,7 +17,10 @@ class AnswersChecker extends Controller
         $user = auth('sanctum')->user()->id;
 
         // Validator if the lesson was already been taken by this user.
-        $lessonTaken = Words_learned::where('lesson_id', $lesson_id)->first();
+        $lessonTaken = Words_learned::where([
+            'lesson_id' => $lesson_id,
+            'user_id' => $user
+        ])->first();
 
         if ($lessonTaken)  return response()->json([
             'message' => 'You cannot repeat the lessons that you have already taken.',
@@ -89,15 +92,24 @@ class AnswersChecker extends Controller
                 'user_id' => $user,
                 'lesson_id' => $lesson_id,
                 'word_learned' => NULL,
+            ])->activities()->create([
+                'user_id' => $user
             ]);
         }
 
-        foreach ($wordsLearned as $word_learned) {
-            Words_learned::create([
+        foreach ($wordsLearned as $index => $word_learned) {
+            $learnedWords = Words_learned::create([
                 'user_id' => $user,
                 'lesson_id' => $lesson_id,
                 'word_learned' => $word_learned->choice,
             ]);
+
+            // Save only 1 activity in activities table to back track.
+            if ($index === count($wordsLearned) - 1) {
+                $learnedWords->activities()->create([
+                    'user_id' => $user
+                ]);
+            }
         }
 
         // If all the conditions are met, return the essential data for the front end.
