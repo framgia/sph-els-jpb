@@ -45,13 +45,15 @@ class WordsLearned extends Controller
 
         $totalQuestions = count(Question::where('lesson_id', $lesson_id)->get());
 
+        $score = $lesson[0]->word_learned === null ? 0 : count($lesson);
+
         // Create data structure for response. 
         $data = [
             'user' => $lesson[0]->user_id,
             'lesson_title' => $lessonTitle,
             'time_taken' => $lesson[0]->created_at,
             'total_item' => $totalQuestions,
-            'user_score' => count($lesson),
+            'user_score' => $score,
             'words_learned' => $lesson
         ];
 
