@@ -29,8 +29,6 @@ class ChoicesController extends Controller
     {
         $this->isAdmin();
 
-        return response($request);
-
         $data = $request->validate([
             'question_id' => 'required|integer',
             'choice' => 'required|string|max:191',
