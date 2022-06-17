@@ -19,7 +19,7 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('choices');
+            $table->string('choice');
             $table->boolean('is_correct');
             $table->timestamps();
         });
