@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('choices', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('question_id')
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->string('choice');
-            $table->boolean('is_correct');
-            $table->timestamps();
+        Schema::table('choices', function (Blueprint $table) {
+            $table->renameColumn('choices', 'choice');
         });
     }
 
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('choices');
+        Schema::table('choices', function (Blueprint $table) {
+            $table->renameColumn('choice', 'choices');
+        });
     }
 };
