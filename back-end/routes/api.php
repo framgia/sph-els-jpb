@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Follow\FollowsController;
+use App\Http\Controllers\Lesson\ChoicesController;
 use App\Http\Controllers\Lesson\LessonsController;
+use App\Http\Controllers\Lesson\QuestionsController;
 use App\Http\Controllers\User\UsersController;
 use App\Http\Controllers\User\UserUpdateController;
 use Illuminate\Http\Request;
@@ -41,12 +43,21 @@ Route::group([
     Route::resource('/admin', AdminController::class);
 
     // User Routes.
-    Route::post('/users/logout', [UsersController::class, 'logout']);
     Route::resource('/users', UsersController::class)
         ->only(['index', 'show', 'update']);
+    Route::get('/users/search/{name}', [UsersController::class, 'search']);
+    Route::post('/users/logout', [UsersController::class, 'logout']);
 
     // Lessons Routes.
     Route::resource('/lessons', LessonsController::class);
+    Route::get('/lessons/search/{lesson_name}', [LessonsController::class, 'search']);
+    Route::get('/lessons/complete/{lesson_id}', [LessonsController::class, 'completeLesson']);
+
+    // Questions Routes.
+    Route::resource('/questions', QuestionsController::class);
+
+    // Choices Routes.
+    Route::resource('/choices', ChoicesController::class);
 
     // Follows Routes. 
     Route::prefix('/follows')->group(function () {

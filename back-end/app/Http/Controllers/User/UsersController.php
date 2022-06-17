@@ -170,4 +170,25 @@ class UsersController extends Controller
             'message' => 'Logged out',
         ], 201);
     }
+
+    // Search users by name
+    public function search($name)
+    {
+        $fullName = explode(" ", $name);
+
+        $firstName = $fullName[0];
+        $lastName = $fullName[count($fullName) - 1];
+
+        $result = User::where("first_name", "like", "%$firstName%")
+            ->orWhere("last_name", "like", "%$lastName%")
+            ->get();
+
+        if (count($result) === 0) return response()->json([
+            'message' => "Can't find $name in the users list"
+        ], 200);
+
+        return response()->json([
+            'data' => $result
+        ], 200);
+    }
 }

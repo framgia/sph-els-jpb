@@ -21,7 +21,7 @@ class ChoiceSeeder extends Seeder
             // Create 1 correct choice
             Choice::create([
                 'question_id' => $question->id,
-                'choices' => 'correct',
+                'choice' => 'correct',
                 'is_correct' => true,
             ]);
 

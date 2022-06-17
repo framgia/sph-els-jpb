@@ -6,6 +6,8 @@ use App\Models\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Traits\AdminTrait;
 use App\Http\Controllers\Controller;
+use App\Models\Choice;
+use App\Models\Question;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -22,7 +24,7 @@ class LessonsController extends Controller
 
         return response()->json([
             'data' => $lessons
-        ]);
+        ], 200);
     }
 
     // Store a newly created Lesson in storage.
@@ -40,25 +42,27 @@ class LessonsController extends Controller
             'description' => $data['description'],
         ]);
 
+        $lesson_id = Lesson::latest()->first()->id;
+
         return response()->json([
-            'message' => 'Lesson Created Successfully'
+            'message' => 'Lesson Created Successfully',
+            'lesson_id' => $lesson_id
         ], 201);
     }
 
     // Display the specified Lesson.
     public function show($lesson_id)
     {
-        $lessons = Lesson::findOrFail($lesson_id);
+        $lesson = Lesson::find($lesson_id);
 
         return response()->json([
-            'data' => $lessons
-        ]);
+            'data' => $lesson
+        ], 200);
     }
 
     // Update the specified Lesson in storage.
     public function update(Request $request, $lesson_id)
     {
-
         $this->isAdmin();
 
         $data = $request->validate([
@@ -66,7 +70,7 @@ class LessonsController extends Controller
             'description' => 'required|string|max:191',
         ]);
 
-        Lesson::findOrFail($lesson_id)->updatecreate([
+        Lesson::find($lesson_id)->update([
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
@@ -79,8 +83,55 @@ class LessonsController extends Controller
     // Remove the specified Lesson from storage.
     public function destroy($lesson_id)
     {
-        Lesson::findOrFail($lesson_id)->delete();
+        $this->isAdmin();
 
-        return response()->json(['message' => 'Lesson Deleted Successfully']);
+        $lesson = Lesson::find($lesson_id);
+
+        if (!$lesson) return response()->json(['message' => 'This Lesson was already been deleted'], 200);
+
+        $lesson->delete();
+        return response()->json(['message' => 'Lesson Deleted Successfully'], 200);
+    }
+
+    // Get Lesson with its questions and choices
+    public function completeLesson($lesson_id)
+    {
+        $lesson = Lesson::find($lesson_id);
+        $questions = Question::where('lesson_id', $lesson_id)->get();
+
+        $questionAndChoices = array();
+
+        foreach ($questions as $question) {
+            $choice = Choice::where('question_id', $question->id)->get();
+
+            array_push($questionAndChoices, [
+                "id" => $question->id,
+                "question" => $question->question,
+                "choices" => $choice
+            ]);
+        }
+
+        $data = [
+            'lesson' => $lesson,
+            'questions' => $questionAndChoices
+        ];
+
+        return response()->json([
+            'data' => $data
+        ], 200);
+    }
+
+    // Search lesson by title name
+    public function search($lesson_name)
+    {
+        $result = Lesson::where("title", "like", "%$lesson_name%")->get();
+
+        if (count($result) === 0) return response()->json([
+            'message' => "Can't find $lesson_name in the lessons list"
+        ], 200);
+
+        return response()->json([
+            'data' => $result
+        ], 200);
     }
 }

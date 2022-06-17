@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Image;
+use App\Models\Answer;
+use App\Models\Words_learned;
+use App\Models\Follow;
+use App\Models\Activity;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -32,6 +37,31 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
     ];
+
+    public function answer()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function activity()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    public function follow()
+    {
+        return $this->hasMany(Follow::class);
+    }
+
+    public function image()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function words_learned()
+    {
+        return $this->hasMany(Words_learned::class);
+    }
 
     /**
      * The attributes that should be cast.
