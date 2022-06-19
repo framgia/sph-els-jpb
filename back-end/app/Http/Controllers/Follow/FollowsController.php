@@ -38,7 +38,7 @@ class FollowsController extends Controller
     {
         $follower = auth('sanctum')->user()->id;
 
-        if ($follower === $following) {
+        if ($follower === intval($following)) {
             return response()->json(['message' => 'We don\'t do that here'], 200);
         }
 
@@ -68,7 +68,7 @@ class FollowsController extends Controller
     {
         $unfollower = auth('sanctum')->user()->id;
 
-        if ($unfollower === $unfollowing) {
+        if ($unfollower === intval($unfollowing)) {
             return response()->json(['message' => 'We don\'t do that here'], 200);
         }
 

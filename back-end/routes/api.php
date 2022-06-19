@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Answer\AnswersChecker;
-use App\Http\Controllers\Answer\WordsLearned;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserUpdateController;
+use App\Http\Controllers\Activity\ActivitiesController;
+use App\Http\Controllers\Lesson\QuestionsController;
 use App\Http\Controllers\Follow\FollowsController;
 use App\Http\Controllers\Lesson\ChoicesController;
 use App\Http\Controllers\Lesson\LessonsController;
-use App\Http\Controllers\Lesson\QuestionsController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Answer\AnswersChecker;
 use App\Http\Controllers\User\UsersController;
-use App\Http\Controllers\User\UserUpdateController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Answer\WordsLearned;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "aTpi" middleware group. Enjoy building your API!
 |
 */
-//
 
 //------------------All-Public-Routes------------------//
 Route::group(['prefix' => '/v1'], function () {
@@ -73,5 +73,11 @@ Route::group([
         Route::delete('/{unfollowing}', [FollowsController::class, 'destroy']);
         Route::get('/following/{follower_id}', [FollowsController::class, 'followings']);
         Route::get('/follower/{following_id}', [FollowsController::class, 'followers']);
+    });
+
+    // Activity Routes.
+    Route::prefix('/activities')->group(function () {
+        Route::get('/', [ActivitiesController::class, 'index']);
+        Route::get('/{activity_id}', [ActivitiesController::class, 'show']);
     });
 });
