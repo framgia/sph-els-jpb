@@ -18,17 +18,17 @@ class FollowsController extends Controller
     }
 
     // Get all user's followings
-    public function followings($follower_id)
+    public function followings($followerId)
     {
-        $followings = Follow::where('user_id', $follower_id)->get();
+        $followings = Follow::where('user_id', $followerId)->get();
 
         return response()->json(['data' => $followings], 200);
     }
 
     // Get all user's followers
-    public function followers($following_id)
+    public function followers($followingId)
     {
-        $followers = Follow::where('following_id', $following_id)->get();
+        $followers = Follow::where('following_id', $followingId)->get();
 
         return response()->json(['data' => $followers], 200);
     }
@@ -38,7 +38,7 @@ class FollowsController extends Controller
     {
         $follower = auth('sanctum')->user()->id;
 
-        if ($follower === $following) {
+        if ($follower === intval($following)) {
             return response()->json(['message' => 'We don\'t do that here'], 200);
         }
 
@@ -54,7 +54,11 @@ class FollowsController extends Controller
         Follow::create([
             'user_id' => $follower,
             'following_id' => $following
+        ])->activities()->create([
+            'user_id' => $follower
         ]);
+
+
 
         return response()->json(['message' => 'Followed successfully'], 201);
     }
@@ -64,7 +68,7 @@ class FollowsController extends Controller
     {
         $unfollower = auth('sanctum')->user()->id;
 
-        if ($unfollower === $unfollowing) {
+        if ($unfollower === intval($unfollowing)) {
             return response()->json(['message' => 'We don\'t do that here'], 200);
         }
 

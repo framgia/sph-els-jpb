@@ -116,9 +116,9 @@ To update specific User Information, put this in the request body using JSON.
 | :---------------------------- | :------- | :--------------------------------------------------- | :----- |
 | `/api/v1/lessons`             | `POST`   | Create new lesson                                    | ok     |
 | `/api/v1/lessons`             | `GET`    | Get all lessons in the Database                      | ok     |
-| `/api/v1/lessons/{lesson_id}` | `GET`    | Get specific lesson based on id from the database    | ok     |
-| `/api/v1/lessons/{lesson_id}` | `PUT`    | Update specific lesson based on id from the database | ok     |
-| `/api/v1/lessons/{lesson_id}` | `DELETE` | Delete specific lesson based on id from the database | ok     |
+| `/api/v1/lessons/{lessonId}` | `GET`    | Get specific lesson based on id from the database    | ok     |
+| `/api/v1/lessons/{lessonId}` | `PUT`    | Update specific lesson based on id from the database | ok     |
+| `/api/v1/lessons/{lessonId}` | `DELETE` | Delete specific lesson based on id from the database | ok     |
 
 ### **_Create New Lesson_**
 
@@ -143,7 +143,7 @@ To create new lesson, put this in the request body using JSON.
 ### **_Update Lesson_**
 
 To update a lesson, put this in the request body using JSON.
-`/api/v1/lessons/{lesson_id}`
+`/api/v1/lessons/{lessonId}`
 
 ```bash
 {

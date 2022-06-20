@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Choice extends Model
 {
@@ -12,8 +13,8 @@ class Choice extends Model
     protected $guarded = [];
 
     protected $hidden = [
-        'id',
         'question_id',
+        'is_correct',
         'created_at',
         'updated_at',
     ];
