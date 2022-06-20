@@ -25,29 +25,29 @@ class ActivitiesController extends Controller
         return response($arrayData);
     }
 
-    public function show($activityID)
+    public function show($activityId)
     {
         $userLoggedIn = auth('sanctum')->user()->id;
 
-        $activity = Activity::find($activityID);
+        $activity = Activity::find($activityId);
         $type = $activity->activitiable_type;
 
         $activityType = explode('\\', $type)[count(explode('\\', $type)) - 1];
         $timeStamps = $activity->created_at;
 
         if ($activityType === 'WordsLearned') {
-            $wordsLearned = Activity::find($activityID)->activitiable;
+            $wordsLearned = Activity::find($activityId)->activitiable;
 
             $userTaker = $wordsLearned->user_id;
 
             $user = User::find($userTaker);
             $name = $userLoggedIn === $userTaker ? 'You' : "$user->first_name $user->last_name";
 
-            $lessonID = $wordsLearned->lesson_id;
-            $lesson = Lesson::find($lessonID);
+            $lessonId = $wordsLearned->lesson_id;
+            $lesson = Lesson::find($lessonId);
 
             $learnedWords =  WordsLearned::where([
-                'lesson_id' => $lessonID,
+                'lesson_id' => $lessonId,
                 'user_id' => $userTaker
             ])->get();
             $score = $learnedWords[0]->word_learned === null ? 0 : count($learnedWords);
@@ -66,7 +66,7 @@ class ActivitiesController extends Controller
             ], 200);
         }
 
-        $follows = Activity::find($activityID)->activitiable;
+        $follows = Activity::find($activityId)->activitiable;
 
         $follower = $follows->user_id;
         $following = User::find($follows->following_id);
