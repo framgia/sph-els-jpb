@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Answer;
 
 use App\Models\Lesson;
 use App\Models\Question;
-use Illuminate\Http\Request;
 use App\Models\WordsLearned;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class WordLearneds extends Controller
+class WordsLearnedController extends Controller
 {
     // Get words learned under lesson's taken with score and timestamps.
     public function index()

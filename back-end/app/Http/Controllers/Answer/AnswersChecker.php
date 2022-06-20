@@ -7,7 +7,6 @@ use App\Models\Answer;
 use App\Models\Choice;
 use App\Models\Question;
 use App\Models\WordsLearned;
-use App\Models\Words_learned;
 use Illuminate\Http\Request;
 
 class AnswersChecker extends Controller
