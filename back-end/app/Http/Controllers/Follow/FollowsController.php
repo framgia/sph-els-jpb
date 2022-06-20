@@ -18,17 +18,17 @@ class FollowsController extends Controller
     }
 
     // Get all user's followings
-    public function followings($follower_id)
+    public function followings($followerID)
     {
-        $followings = Follow::where('user_id', $follower_id)->get();
+        $followings = Follow::where('user_id', $followerID)->get();
 
         return response()->json(['data' => $followings], 200);
     }
 
     // Get all user's followers
-    public function followers($following_id)
+    public function followers($followingID)
     {
-        $followers = Follow::where('following_id', $following_id)->get();
+        $followers = Follow::where('following_id', $followingID)->get();
 
         return response()->json(['data' => $followers], 200);
     }

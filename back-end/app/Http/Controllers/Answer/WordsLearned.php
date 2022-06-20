@@ -30,20 +30,20 @@ class WordsLearned extends Controller
         // Get all the taken lesson of this user.
         $getLessonDetails = array();
 
-        foreach ($uniqueLessonList as $lesson_id) {
-            array_push($getLessonDetails, $this->show($lesson_id)->original);
+        foreach ($uniqueLessonList as $lessonID) {
+            array_push($getLessonDetails, $this->show($lessonID)->original);
         }
 
         return response($getLessonDetails);
     }
 
     // Get words learned under lesson's taken with score and timestamps.
-    public function show($lesson_id)
+    public function show($lessonID)
     {
-        $lesson = Words_learned::where('lesson_id', $lesson_id)->get();
-        $lessonTitle = Lesson::where('id', $lesson_id)->first()->title;
+        $lesson = Words_learned::where('lesson_id', $lessonID)->get();
+        $lessonTitle = Lesson::where('id', $lessonID)->first()->title;
 
-        $totalQuestions = count(Question::where('lesson_id', $lesson_id)->get());
+        $totalQuestions = count(Question::where('lesson_id', $lessonID)->get());
 
         $score = $lesson[0]->word_learned === null ? 0 : count($lesson);
 

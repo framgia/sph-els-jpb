@@ -42,18 +42,18 @@ class LessonsController extends Controller
             'description' => $data['description'],
         ]);
 
-        $lesson_id = Lesson::latest()->first()->id;
+        $lessonID = Lesson::latest()->first()->id;
 
         return response()->json([
             'message' => 'Lesson Created Successfully',
-            'lesson_id' => $lesson_id
+            'lesson_id' => $lessonID
         ], 201);
     }
 
     // Display the specified Lesson.
-    public function show($lesson_id)
+    public function show($lessonID)
     {
-        $lesson = Lesson::find($lesson_id);
+        $lesson = Lesson::find($lessonID);
 
         return response()->json([
             'data' => $lesson
@@ -61,7 +61,7 @@ class LessonsController extends Controller
     }
 
     // Update the specified Lesson in storage.
-    public function update(Request $request, $lesson_id)
+    public function update(Request $request, $lessonID)
     {
         $this->isAdmin();
 
@@ -70,7 +70,7 @@ class LessonsController extends Controller
             'description' => 'required|string|max:191',
         ]);
 
-        Lesson::find($lesson_id)->update([
+        Lesson::find($lessonID)->update([
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
@@ -81,11 +81,11 @@ class LessonsController extends Controller
     }
 
     // Remove the specified Lesson from storage.
-    public function destroy($lesson_id)
+    public function destroy($lessonID)
     {
         $this->isAdmin();
 
-        $lesson = Lesson::find($lesson_id);
+        $lesson = Lesson::find($lessonID);
 
         if (!$lesson) return response()->json(['message' => 'This Lesson was already been deleted'], 200);
 
@@ -94,10 +94,10 @@ class LessonsController extends Controller
     }
 
     // Get Lesson with its questions and choices
-    public function completeLesson($lesson_id)
+    public function completeLesson($lessonID)
     {
-        $lesson = Lesson::find($lesson_id);
-        $questions = Question::where('lesson_id', $lesson_id)->get();
+        $lesson = Lesson::find($lessonID);
+        $questions = Question::where('lesson_id', $lessonID)->get();
 
         $questionAndChoices = array();
 
@@ -122,12 +122,12 @@ class LessonsController extends Controller
     }
 
     // Search lesson by title name
-    public function search($lesson_name)
+    public function search($lessonName)
     {
-        $result = Lesson::where("title", "like", "%$lesson_name%")->get();
+        $result = Lesson::where("title", "like", "%$lessonName%")->get();
 
         if (count($result) === 0) return response()->json([
-            'message' => "Can't find $lesson_name in the lessons list"
+            'message' => "Can't find $lessonName in the lessons list"
         ], 200);
 
         return response()->json([

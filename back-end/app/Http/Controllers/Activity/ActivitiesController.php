@@ -25,18 +25,18 @@ class ActivitiesController extends Controller
         return response($arrayData);
     }
 
-    public function show($activity_id)
+    public function show($activityID)
     {
         $userLoggedIn = auth('sanctum')->user()->id;
 
-        $activity = Activity::find($activity_id);
+        $activity = Activity::find($activityID);
         $type = $activity->activitiable_type;
 
         $activityType = explode('\\', $type)[count(explode('\\', $type)) - 1];
         $timeStamps = $activity->created_at;
 
         if ($activityType === 'Words_learned') {
-            $words_learned = Activity::find($activity_id)->activitiable;
+            $words_learned = Activity::find($activityID)->activitiable;
 
             $userTaker = $words_learned->user_id;
 
@@ -66,7 +66,7 @@ class ActivitiesController extends Controller
             ], 200);
         }
 
-        $follows = Activity::find($activity_id)->activitiable;
+        $follows = Activity::find($activityID)->activitiable;
 
         $follower = $follows->user_id;
         $following = User::find($follows->following_id);

@@ -52,8 +52,8 @@ Route::group([
 
     // Lessons Routes.
     Route::resource('/lessons', LessonsController::class);
-    Route::get('/lessons/search/{lesson_name}', [LessonsController::class, 'search']);
-    Route::get('/lessons/complete/{lesson_id}', [LessonsController::class, 'completeLesson']);
+    Route::get('/lessons/search/{lessonName}', [LessonsController::class, 'search']);
+    Route::get('/lessons/complete/{lessonID}', [LessonsController::class, 'completeLesson']);
 
     // Questions Routes.
     Route::resource('/questions', QuestionsController::class);
@@ -62,22 +62,22 @@ Route::group([
     Route::resource('/choices', ChoicesController::class);
 
     // Answer Checker. 
-    Route::post('/answers/checker/{lesson_id}', [AnswersChecker::class, 'checker']);
+    Route::post('/answers/checker/{lessonID}', [AnswersChecker::class, 'checker']);
     Route::get('/words/learned', [WordsLearned::class, 'index']);
-    Route::get('/words/learned/{lesson_id}', [WordsLearned::class, 'show']);
+    Route::get('/words/learned/{lessonID}', [WordsLearned::class, 'show']);
 
     // Follows Routes. 
     Route::prefix('/follows')->group(function () {
         Route::get('/', [FollowsController::class, 'index']);
         Route::post('/{following}', [FollowsController::class, 'store']);
         Route::delete('/{unfollowing}', [FollowsController::class, 'destroy']);
-        Route::get('/following/{follower_id}', [FollowsController::class, 'followings']);
-        Route::get('/follower/{following_id}', [FollowsController::class, 'followers']);
+        Route::get('/following/{followerID}', [FollowsController::class, 'followings']);
+        Route::get('/follower/{followingID}', [FollowsController::class, 'followers']);
     });
 
     // Activity Routes.
     Route::prefix('/activities')->group(function () {
         Route::get('/', [ActivitiesController::class, 'index']);
-        Route::get('/{activity_id}', [ActivitiesController::class, 'show']);
+        Route::get('/{activityID}', [ActivitiesController::class, 'show']);
     });
 });

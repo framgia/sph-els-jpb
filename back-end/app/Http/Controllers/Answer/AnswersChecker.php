@@ -11,14 +11,14 @@ use Illuminate\Http\Request;
 
 class AnswersChecker extends Controller
 {
-    public function checker($lesson_id)
+    public function checker($lessonID)
     {
         // Get User ID.
         $user = auth('sanctum')->user()->id;
 
         // Validator if the lesson was already been taken by this user.
         $lessonTaken = Words_learned::where([
-            'lesson_id' => $lesson_id,
+            'lesson_id' => $lessonID,
             'user_id' => $user
         ])->first();
 
@@ -38,7 +38,7 @@ class AnswersChecker extends Controller
         // Get all the lesson's correct answers.
         $correctAnswers = array();
 
-        $getAllQuestions = Question::where('lesson_id', $lesson_id)->get();
+        $getAllQuestions = Question::where('lesson_id', $lessonID)->get();
 
         foreach ($getAllQuestions as $question) {
             $getAllChoices = Choice::where('question_id', $question->id)->get();
@@ -90,7 +90,7 @@ class AnswersChecker extends Controller
         if ($score === 0) {
             Words_learned::create([
                 'user_id' => $user,
-                'lesson_id' => $lesson_id,
+                'lesson_id' => $lessonID,
                 'word_learned' => NULL,
             ])->activities()->create([
                 'user_id' => $user
@@ -100,7 +100,7 @@ class AnswersChecker extends Controller
         foreach ($wordsLearned as $index => $word_learned) {
             $learnedWords = Words_learned::create([
                 'user_id' => $user,
-                'lesson_id' => $lesson_id,
+                'lesson_id' => $lessonID,
                 'word_learned' => $word_learned->choice,
             ]);
 
