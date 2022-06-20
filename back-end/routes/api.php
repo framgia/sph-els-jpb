@@ -11,7 +11,7 @@ use App\Http\Controllers\Lesson\LessonsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Answer\AnswersChecker;
 use App\Http\Controllers\User\UsersController;
-use App\Http\Controllers\Answer\WordsLearned;
+use App\Http\Controllers\Answer\WordLearneds;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,8 +63,8 @@ Route::group([
 
     // Answer Checker. 
     Route::post('/answers/checker/{lessonID}', [AnswersChecker::class, 'checker']);
-    Route::get('/words/learned', [WordsLearned::class, 'index']);
-    Route::get('/words/learned/{lessonID}', [WordsLearned::class, 'show']);
+    Route::get('/words/learned', [WordLearneds::class, 'index']);
+    Route::get('/words/learned/{lessonID}', [WordLearneds::class, 'show']);
 
     // Follows Routes. 
     Route::prefix('/follows')->group(function () {

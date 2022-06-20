@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Image;
 use App\Models\Answer;
-use App\Models\Words_learned;
+use App\Models\WordsLearned;
 use App\Models\Follow;
 use App\Models\Activity;
 use Laravel\Sanctum\HasApiTokens;
@@ -58,9 +58,9 @@ class User extends Authenticatable
         return $this->hasMany(Image::class);
     }
 
-    public function words_learned()
+    public function wordsLearned()
     {
-        return $this->hasMany(Words_learned::class);
+        return $this->hasMany(WordsLearned::class);
     }
 
     /**

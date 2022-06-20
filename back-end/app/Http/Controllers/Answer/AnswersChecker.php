@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Choice;
 use App\Models\Question;
+use App\Models\WordsLearned;
 use App\Models\Words_learned;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class AnswersChecker extends Controller
         $user = auth('sanctum')->user()->id;
 
         // Validator if the lesson was already been taken by this user.
-        $lessonTaken = Words_learned::where([
+        $lessonTaken = WordsLearned::where([
             'lesson_id' => $lessonID,
             'user_id' => $user
         ])->first();
@@ -86,9 +87,9 @@ class AnswersChecker extends Controller
             };
         }
 
-        // Save all the correct answers, and the lesson id taken to words_learned table.
+        // Save all the correct answers, and the lesson id taken to WordsLearned table.
         if ($score === 0) {
-            Words_learned::create([
+            WordsLearned::create([
                 'user_id' => $user,
                 'lesson_id' => $lessonID,
                 'word_learned' => NULL,
@@ -98,7 +99,7 @@ class AnswersChecker extends Controller
         }
 
         foreach ($wordsLearned as $index => $word_learned) {
-            $learnedWords = Words_learned::create([
+            $learnedWords = WordsLearned::create([
                 'user_id' => $user,
                 'lesson_id' => $lessonID,
                 'word_learned' => $word_learned->choice,

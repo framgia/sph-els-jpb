@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Answer;
 use App\Models\Lesson;
 use App\Models\Question;
 use Illuminate\Http\Request;
-use App\Models\Words_learned;
+use App\Models\WordsLearned;
 use App\Http\Controllers\Controller;
 
-class WordsLearned extends Controller
+class WordLearneds extends Controller
 {
     // Get words learned under lesson's taken with score and timestamps.
     public function index()
@@ -16,7 +16,7 @@ class WordsLearned extends Controller
         $user = auth('sanctum')->user()->id;
 
         // Filter the duplicated lesson id's.
-        $lessonTaken = Words_learned::where('user_id', $user)->get();
+        $lessonTaken = WordsLearned::where('user_id', $user)->get();
 
         $lessonList = array();
 
@@ -40,7 +40,7 @@ class WordsLearned extends Controller
     // Get words learned under lesson's taken with score and timestamps.
     public function show($lessonID)
     {
-        $lesson = Words_learned::where('lesson_id', $lessonID)->get();
+        $lesson = WordsLearned::where('lesson_id', $lessonID)->get();
         $lessonTitle = Lesson::where('id', $lessonID)->first()->title;
 
         $totalQuestions = count(Question::where('lesson_id', $lessonID)->get());

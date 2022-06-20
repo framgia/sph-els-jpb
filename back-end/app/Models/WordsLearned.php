@@ -8,7 +8,7 @@ use App\Models\Activity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Words_learned extends Model
+class WordsLearned extends Model
 {
     use HasFactory;
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Lesson;
 use App\Models\User;
-use App\Models\Words_learned;
+use App\Models\WordsLearned;
 
 class ActivitiesController extends Controller
 {
@@ -35,18 +35,18 @@ class ActivitiesController extends Controller
         $activityType = explode('\\', $type)[count(explode('\\', $type)) - 1];
         $timeStamps = $activity->created_at;
 
-        if ($activityType === 'Words_learned') {
-            $words_learned = Activity::find($activityID)->activitiable;
+        if ($activityType === 'WordsLearned') {
+            $wordsLearned = Activity::find($activityID)->activitiable;
 
-            $userTaker = $words_learned->user_id;
+            $userTaker = $wordsLearned->user_id;
 
             $user = User::find($userTaker);
             $name = $userLoggedIn === $userTaker ? 'You' : "$user->first_name $user->last_name";
 
-            $lessonID = $words_learned->lesson_id;
+            $lessonID = $wordsLearned->lesson_id;
             $lesson = Lesson::find($lessonID);
 
-            $learnedWords =  Words_learned::where([
+            $learnedWords =  WordsLearned::where([
                 'lesson_id' => $lessonID,
                 'user_id' => $userTaker
             ])->get();
